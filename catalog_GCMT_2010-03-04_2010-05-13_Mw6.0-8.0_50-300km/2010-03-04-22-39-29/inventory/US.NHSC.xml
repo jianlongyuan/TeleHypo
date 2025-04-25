@@ -1,0 +1,948 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+ <FDSNStationXML xmlns="http://www.fdsn.org/xml/station/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iris="http://www.fdsn.org/xml/station/1/iris" xsi:schemaLocation="http://www.fdsn.org/xml/station/1 http://www.fdsn.org/xml/station/fdsn-station-1.1.xsd" schemaVersion="1.1">
+  <Source>IRIS-DMC</Source>
+  <Sender>IRIS-DMC</Sender>
+  <Module>IRIS WEB SERVICE: fdsnws-station | version: 1.1.48</Module>
+  <ModuleURI></ModuleURI>
+  <Created>2022-08-19T04:36:26.5450</Created>
+  <Network code="US" startDate="1990-01-01T00:00:00.0000" restrictedStatus="open">
+   <Description>United States National Seismic Network (USNSN)</Description>
+   <Identifier type="DOI">10.7914/SN/US
+   </Identifier>
+   <TotalNumberStations>84</TotalNumberStations>
+   <SelectedNumberStations>1</SelectedNumberStations>
+   <Station code="NHSC" startDate="2001-05-01T00:00:00.0000" restrictedStatus="open" iris:alternateNetworkCodes="_ANSS-BB,_CEUSN,.CEUSN-CONTRIB,.EARTHSCOPE,_FDSN-ALL,.GREG,_REALTIME,.UNRESTRICTED,_US-ALL,_US-REF,_US-REGIONAL,_US-TA">
+    <Latitude>33.1067</Latitude>
+    <Longitude>-80.1778</Longitude>
+    <Elevation>11.0</Elevation>
+    <Site>
+     <Name>New Hope, South Carolina, USA</Name>
+    </Site>
+    <CreationDate>2001-05-01T00:00:00.0000</CreationDate>
+    <TotalNumberChannels>129</TotalNumberChannels>
+    <SelectedNumberChannels>3</SelectedNumberChannels>
+    <Channel code="BHE" locationCode="00" startDate="2009-05-05T18:00:00.0000" endDate="2010-04-29T19:00:00.0000" restrictedStatus="open">
+     <Comment>
+      <Value>Config Change</Value>
+      <BeginEffectiveTime>2009-05-05T18:00:00.0000</BeginEffectiveTime>
+      <EndEffectiveTime>2010-04-29T19:00:00.0000</EndEffectiveTime>
+     </Comment>
+     <Comment>
+      <Value>[SENSOR::EPISENSOR ES-T::204], [SENSOR::CMG-3ESP::T3800], [LOGGER::Q680::921006]</Value>
+      <BeginEffectiveTime>2009-05-05T18:00:00.0000</BeginEffectiveTime>
+      <EndEffectiveTime>2010-04-29T19:00:00.0000</EndEffectiveTime>
+     </Comment>
+     <Latitude>33.1067</Latitude>
+     <Longitude>-80.1778</Longitude>
+     <Elevation>11</Elevation>
+     <Depth>0</Depth>
+     <Azimuth>90</Azimuth>
+     <Dip>0</Dip>
+     <Type>CONTINUOUS</Type>
+     <Type>GEOPHYSICAL</Type>
+     <SampleRate>4E01</SampleRate>
+     <Sensor>
+      <Type>GURALP</Type>
+      <Description>Velocity Sensor</Description>
+      <Manufacturer>GURALP</Manufacturer>
+      <Model>CMG-3ESP</Model>
+      <SerialNumber>T3800</SerialNumber>
+     </Sensor>
+     <Equipment>
+      <Type>QUANTERRA</Type>
+      <Manufacturer>QUANTERRA</Manufacturer>
+      <Model>Q680</Model>
+      <SerialNumber>921006</SerialNumber>
+     </Equipment>
+     <Response>
+     <InstrumentSensitivity>
+       <Value>8.15754E8</Value>
+       <Frequency>0.1</Frequency>
+       <InputUnits>
+         <Name>m/s</Name>
+         <Description>Velocity in meters per second</Description>
+       </InputUnits>
+       <OutputUnits>
+         <Name>counts</Name>
+         <Description>Digital Count in Digital counts</Description>
+       </OutputUnits>
+     </InstrumentSensitivity>
+      <Stage number="1">
+      <PolesZeros name="CMG-3ESP ASL Legacy">
+        <Description>ASL Historical Metadata</Description>
+        <InputUnits>
+          <Name>m/s</Name>
+          <Description>Velocity in meters per second</Description>
+        </InputUnits>
+        <OutputUnits>
+          <Name>V</Name>
+          <Description>Voltage in Volts</Description>
+        </OutputUnits>
+        <PzTransferFunctionType>LAPLACE (RADIANS/SECOND)</PzTransferFunctionType>
+        <NormalizationFactor>310.164</NormalizationFactor>
+        <NormalizationFrequency>0.1</NormalizationFrequency>
+        <Zero number="0">
+          <Real>0.0</Real>
+          <Imaginary>0.0</Imaginary>
+        </Zero>
+        <Zero number="1">
+          <Real>0.0</Real>
+          <Imaginary>0.0</Imaginary>
+        </Zero>
+        <Zero number="2">
+          <Real>-945.6</Real>
+          <Imaginary>0.0</Imaginary>
+        </Zero>
+        <Pole number="0">
+          <Real>-0.04442</Real>
+          <Imaginary>-0.04442</Imaginary>
+        </Pole>
+        <Pole number="1">
+          <Real>-0.04442</Real>
+          <Imaginary>0.04442</Imaginary>
+        </Pole>
+        <Pole number="2">
+          <Real>-505.8</Real>
+          <Imaginary>-193.5</Imaginary>
+        </Pole>
+        <Pole number="3">
+          <Real>-505.8</Real>
+          <Imaginary>193.5</Imaginary>
+        </Pole>
+      </PolesZeros>
+      <Decimation>
+        <InputSampleRate>5120.0</InputSampleRate>
+        <Factor>1</Factor>
+        <Offset>0</Offset>
+        <Delay>0.0</Delay>
+        <Correction>0.0</Correction>
+      </Decimation>
+      <StageGain>
+        <Value>1990.06</Value>
+        <Frequency>0.1</Frequency>
+      </StageGain>
+
+      </Stage>
+      <Stage number="2">
+      <Coefficients>
+        <InputUnits>
+          <Name>V</Name>
+          <Description>Voltage in Volts</Description>
+        </InputUnits>
+        <OutputUnits>
+          <Name>counts</Name>
+          <Description>Digital Count in Digital counts</Description>
+        </OutputUnits>
+        <CfTransferFunctionType>DIGITAL</CfTransferFunctionType>
+      </Coefficients>
+      <Decimation>
+        <InputSampleRate>5120.0</InputSampleRate>
+        <Factor>1</Factor>
+        <Offset>0</Offset>
+        <Delay>0.0</Delay>
+        <Correction>0.0</Correction>
+      </Decimation>
+      <StageGain>
+        <Value>410025.0</Value>
+        <Frequency>0.02</Frequency>
+      </StageGain>
+
+      </Stage>
+      <Stage number="3">
+      <FIR name="ASL_Q680_NewFW_40_3">
+        <Description>ASL_Q680_NewFW_40_Cascade</Description>
+        <InputUnits>
+          <Name>counts</Name>
+          <Description>Digital Count in Digital counts</Description>
+        </InputUnits>
+        <OutputUnits>
+          <Name>counts</Name>
+          <Description>Digital Count in Digital counts</Description>
+        </OutputUnits>
+        <Symmetry>EVEN</Symmetry>
+        <NumeratorCoefficient i="1">-0.00111328</NumeratorCoefficient>
+        <NumeratorCoefficient i="2">-0.001008</NumeratorCoefficient>
+        <NumeratorCoefficient i="3">-0.00135286</NumeratorCoefficient>
+        <NumeratorCoefficient i="4">-0.00173045</NumeratorCoefficient>
+        <NumeratorCoefficient i="5">-0.00208418</NumeratorCoefficient>
+        <NumeratorCoefficient i="6">-0.00238538</NumeratorCoefficient>
+        <NumeratorCoefficient i="7">-0.00260956</NumeratorCoefficient>
+        <NumeratorCoefficient i="8">-0.00273352</NumeratorCoefficient>
+        <NumeratorCoefficient i="9">-0.00273316</NumeratorCoefficient>
+        <NumeratorCoefficient i="10">-0.00258472</NumeratorCoefficient>
+        <NumeratorCoefficient i="11">-0.00226412</NumeratorCoefficient>
+        <NumeratorCoefficient i="12">-0.00174847</NumeratorCoefficient>
+        <NumeratorCoefficient i="13">-0.00101403</NumeratorCoefficient>
+        <NumeratorCoefficient i="14">-3.51682E-5</NumeratorCoefficient>
+        <NumeratorCoefficient i="15">0.00123782</NumeratorCoefficient>
+        <NumeratorCoefficient i="16">0.00315983</NumeratorCoefficient>
+        <NumeratorCoefficient i="17">0.00699945</NumeratorCoefficient>
+        <NumeratorCoefficient i="18">0.0090996</NumeratorCoefficient>
+        <NumeratorCoefficient i="19">0.0125424</NumeratorCoefficient>
+        <NumeratorCoefficient i="20">0.0163123</NumeratorCoefficient>
+        <NumeratorCoefficient i="21">0.0202632</NumeratorCoefficient>
+        <NumeratorCoefficient i="22">0.0243173</NumeratorCoefficient>
+        <NumeratorCoefficient i="23">0.0284051</NumeratorCoefficient>
+        <NumeratorCoefficient i="24">0.0324604</NumeratorCoefficient>
+        <NumeratorCoefficient i="25">0.0364143</NumeratorCoefficient>
+        <NumeratorCoefficient i="26">0.0401987</NumeratorCoefficient>
+        <NumeratorCoefficient i="27">0.0437451</NumeratorCoefficient>
+        <NumeratorCoefficient i="28">0.0469873</NumeratorCoefficient>
+        <NumeratorCoefficient i="29">0.0498573</NumeratorCoefficient>
+        <NumeratorCoefficient i="30">0.0522796</NumeratorCoefficient>
+        <NumeratorCoefficient i="31">0.054114</NumeratorCoefficient>
+        <NumeratorCoefficient i="32">0.0543903</NumeratorCoefficient>
+      </FIR>
+      <Decimation>
+        <InputSampleRate>5120.0</InputSampleRate>
+        <Factor>16</Factor>
+        <Offset>0</Offset>
+        <Delay>0.006</Delay>
+        <Correction>0.006</Correction>
+      </Decimation>
+      <StageGain>
+        <Value>1.0</Value>
+        <Frequency>0.0</Frequency>
+      </StageGain>
+
+      </Stage>
+      <Stage number="4">
+      <FIR name="ASL_Q680_NewFW_40_4">
+        <Description>ASL_Q680_NewFW_40_Cascade</Description>
+        <InputUnits>
+          <Name>counts</Name>
+          <Description>Digital Count in Digital counts</Description>
+        </InputUnits>
+        <OutputUnits>
+          <Name>counts</Name>
+          <Description>Digital Count in Digital counts</Description>
+        </OutputUnits>
+        <Symmetry>EVEN</Symmetry>
+        <NumeratorCoefficient i="1">1.53855E-4</NumeratorCoefficient>
+        <NumeratorCoefficient i="2">3.1277E-4</NumeratorCoefficient>
+        <NumeratorCoefficient i="3">4.52861E-4</NumeratorCoefficient>
+        <NumeratorCoefficient i="4">3.9578E-4</NumeratorCoefficient>
+        <NumeratorCoefficient i="5">-4.84389E-5</NumeratorCoefficient>
+        <NumeratorCoefficient i="6">-9.92496E-4</NumeratorCoefficient>
+        <NumeratorCoefficient i="7">-0.00235471</NumeratorCoefficient>
+        <NumeratorCoefficient i="8">-0.00378932</NumeratorCoefficient>
+        <NumeratorCoefficient i="9">-0.00472855</NumeratorCoefficient>
+        <NumeratorCoefficient i="10">-0.00456471</NumeratorCoefficient>
+        <NumeratorCoefficient i="11">-0.00293407</NumeratorCoefficient>
+        <NumeratorCoefficient i="12">7.16545E-6</NumeratorCoefficient>
+        <NumeratorCoefficient i="13">0.00346095</NumeratorCoefficient>
+        <NumeratorCoefficient i="14">0.00613788</NumeratorCoefficient>
+        <NumeratorCoefficient i="15">0.00669753</NumeratorCoefficient>
+        <NumeratorCoefficient i="16">0.00435528</NumeratorCoefficient>
+        <NumeratorCoefficient i="17">-5.88914E-4</NumeratorCoefficient>
+        <NumeratorCoefficient i="18">-0.00657815</NumeratorCoefficient>
+        <NumeratorCoefficient i="19">-0.0111658</NumeratorCoefficient>
+        <NumeratorCoefficient i="20">-0.0118968</NumeratorCoefficient>
+        <NumeratorCoefficient i="21">-0.00742773</NumeratorCoefficient>
+        <NumeratorCoefficient i="22">0.00157168</NumeratorCoefficient>
+        <NumeratorCoefficient i="23">0.0122001</NumeratorCoefficient>
+        <NumeratorCoefficient i="24">0.0200547</NumeratorCoefficient>
+        <NumeratorCoefficient i="25">0.0208071</NumeratorCoefficient>
+        <NumeratorCoefficient i="26">0.0121336</NumeratorCoefficient>
+        <NumeratorCoefficient i="27">-0.00474761</NumeratorCoefficient>
+        <NumeratorCoefficient i="28">-0.0246521</NumeratorCoefficient>
+        <NumeratorCoefficient i="29">-0.0395029</NumeratorCoefficient>
+        <NumeratorCoefficient i="30">-0.0407417</NumeratorCoefficient>
+        <NumeratorCoefficient i="31">-0.0223578</NumeratorCoefficient>
+        <NumeratorCoefficient i="32">0.0165229</NumeratorCoefficient>
+        <NumeratorCoefficient i="33">0.0705056</NumeratorCoefficient>
+        <NumeratorCoefficient i="34">0.128823</NumeratorCoefficient>
+        <NumeratorCoefficient i="35">0.178128</NumeratorCoefficient>
+        <NumeratorCoefficient i="36">0.206351</NumeratorCoefficient>
+      </FIR>
+      <Decimation>
+        <InputSampleRate>320.0</InputSampleRate>
+        <Factor>4</Factor>
+        <Offset>0</Offset>
+        <Delay>0.0837</Delay>
+        <Correction>0.0837</Correction>
+      </Decimation>
+      <StageGain>
+        <Value>1.0</Value>
+        <Frequency>0.0</Frequency>
+      </StageGain>
+
+      </Stage>
+      <Stage number="5">
+      <FIR name="ASL_Q680_NewFW_40_5">
+        <Description>ASL_Q680_NewFW_40_Cascade</Description>
+        <InputUnits>
+          <Name>counts</Name>
+          <Description>Digital Count in Digital counts</Description>
+        </InputUnits>
+        <OutputUnits>
+          <Name>counts</Name>
+          <Description>Digital Count in Digital counts</Description>
+        </OutputUnits>
+        <Symmetry>EVEN</Symmetry>
+        <NumeratorCoefficient i="1">2.88049E-4</NumeratorCoefficient>
+        <NumeratorCoefficient i="2">0.00155314</NumeratorCoefficient>
+        <NumeratorCoefficient i="3">0.00298231</NumeratorCoefficient>
+        <NumeratorCoefficient i="4">0.00251715</NumeratorCoefficient>
+        <NumeratorCoefficient i="5">-5.02927E-4</NumeratorCoefficient>
+        <NumeratorCoefficient i="6">-0.00281206</NumeratorCoefficient>
+        <NumeratorCoefficient i="7">-8.08708E-4</NumeratorCoefficient>
+        <NumeratorCoefficient i="8">0.00321543</NumeratorCoefficient>
+        <NumeratorCoefficient i="9">0.00271266</NumeratorCoefficient>
+        <NumeratorCoefficient i="10">-0.0029155</NumeratorCoefficient>
+        <NumeratorCoefficient i="11">-0.00509429</NumeratorCoefficient>
+        <NumeratorCoefficient i="12">0.00133933</NumeratorCoefficient>
+        <NumeratorCoefficient i="13">0.00740034</NumeratorCoefficient>
+        <NumeratorCoefficient i="14">0.00182796</NumeratorCoefficient>
+        <NumeratorCoefficient i="15">-0.00881958</NumeratorCoefficient>
+        <NumeratorCoefficient i="16">-0.00656719</NumeratorCoefficient>
+        <NumeratorCoefficient i="17">0.00838609</NumeratorCoefficient>
+        <NumeratorCoefficient i="18">0.0124269</NumeratorCoefficient>
+        <NumeratorCoefficient i="19">-0.00512979</NumeratorCoefficient>
+        <NumeratorCoefficient i="20">-0.0184869</NumeratorCoefficient>
+        <NumeratorCoefficient i="21">-0.00179237</NumeratorCoefficient>
+        <NumeratorCoefficient i="22">0.0233604</NumeratorCoefficient>
+        <NumeratorCoefficient i="23">0.0130477</NumeratorCoefficient>
+        <NumeratorCoefficient i="24">-0.025171</NumeratorCoefficient>
+        <NumeratorCoefficient i="25">-0.0293135</NumeratorCoefficient>
+        <NumeratorCoefficient i="26">0.0212669</NumeratorCoefficient>
+        <NumeratorCoefficient i="27">0.0521899</NumeratorCoefficient>
+        <NumeratorCoefficient i="28">-0.00661517</NumeratorCoefficient>
+        <NumeratorCoefficient i="29">-0.0883535</NumeratorCoefficient>
+        <NumeratorCoefficient i="30">-0.0366062</NumeratorCoefficient>
+        <NumeratorCoefficient i="31">0.186273</NumeratorCoefficient>
+        <NumeratorCoefficient i="32">0.403765</NumeratorCoefficient>
+      </FIR>
+      <Decimation>
+        <InputSampleRate>80.0</InputSampleRate>
+        <Factor>2</Factor>
+        <Offset>0</Offset>
+        <Delay>0.3793</Delay>
+        <Correction>0.3793</Correction>
+      </Decimation>
+      <StageGain>
+        <Value>1.0</Value>
+        <Frequency>0.0</Frequency>
+      </StageGain>
+
+      </Stage>
+     </Response>
+    </Channel>
+    <Channel code="BHN" locationCode="00" startDate="2009-05-05T18:00:00.0000" endDate="2010-04-29T19:00:00.0000" restrictedStatus="open">
+     <Comment>
+      <Value>Config Change</Value>
+      <BeginEffectiveTime>2009-05-05T18:00:00.0000</BeginEffectiveTime>
+      <EndEffectiveTime>2010-04-29T19:00:00.0000</EndEffectiveTime>
+     </Comment>
+     <Comment>
+      <Value>[SENSOR::EPISENSOR ES-T::204], [SENSOR::CMG-3ESP::T3800], [LOGGER::Q680::921006]</Value>
+      <BeginEffectiveTime>2009-05-05T18:00:00.0000</BeginEffectiveTime>
+      <EndEffectiveTime>2010-04-29T19:00:00.0000</EndEffectiveTime>
+     </Comment>
+     <Latitude>33.1067</Latitude>
+     <Longitude>-80.1778</Longitude>
+     <Elevation>11</Elevation>
+     <Depth>0</Depth>
+     <Azimuth>0</Azimuth>
+     <Dip>0</Dip>
+     <Type>CONTINUOUS</Type>
+     <Type>GEOPHYSICAL</Type>
+     <SampleRate>4E01</SampleRate>
+     <Sensor>
+      <Type>GURALP</Type>
+      <Description>Velocity Sensor</Description>
+      <Manufacturer>GURALP</Manufacturer>
+      <Model>CMG-3ESP</Model>
+      <SerialNumber>T3800</SerialNumber>
+     </Sensor>
+     <Equipment>
+      <Type>QUANTERRA</Type>
+      <Manufacturer>QUANTERRA</Manufacturer>
+      <Model>Q680</Model>
+      <SerialNumber>921006</SerialNumber>
+     </Equipment>
+     <Response>
+     <InstrumentSensitivity>
+       <Value>8.22049E8</Value>
+       <Frequency>0.1</Frequency>
+       <InputUnits>
+         <Name>m/s</Name>
+         <Description>Velocity in meters per second</Description>
+       </InputUnits>
+       <OutputUnits>
+         <Name>counts</Name>
+         <Description>Digital Count in Digital counts</Description>
+       </OutputUnits>
+     </InstrumentSensitivity>
+      <Stage number="1">
+      <PolesZeros name="CMG-3ESP ASL Legacy">
+        <Description>ASL Historical Metadata</Description>
+        <InputUnits>
+          <Name>m/s</Name>
+          <Description>Velocity in meters per second</Description>
+        </InputUnits>
+        <OutputUnits>
+          <Name>V</Name>
+          <Description>Voltage in Volts</Description>
+        </OutputUnits>
+        <PzTransferFunctionType>LAPLACE (RADIANS/SECOND)</PzTransferFunctionType>
+        <NormalizationFactor>310.164</NormalizationFactor>
+        <NormalizationFrequency>0.1</NormalizationFrequency>
+        <Zero number="0">
+          <Real>0.0</Real>
+          <Imaginary>0.0</Imaginary>
+        </Zero>
+        <Zero number="1">
+          <Real>0.0</Real>
+          <Imaginary>0.0</Imaginary>
+        </Zero>
+        <Zero number="2">
+          <Real>-945.6</Real>
+          <Imaginary>0.0</Imaginary>
+        </Zero>
+        <Pole number="0">
+          <Real>-0.04442</Real>
+          <Imaginary>-0.04442</Imaginary>
+        </Pole>
+        <Pole number="1">
+          <Real>-0.04442</Real>
+          <Imaginary>0.04442</Imaginary>
+        </Pole>
+        <Pole number="2">
+          <Real>-505.8</Real>
+          <Imaginary>-193.5</Imaginary>
+        </Pole>
+        <Pole number="3">
+          <Real>-505.8</Real>
+          <Imaginary>193.5</Imaginary>
+        </Pole>
+      </PolesZeros>
+      <Decimation>
+        <InputSampleRate>5120.0</InputSampleRate>
+        <Factor>1</Factor>
+        <Offset>0</Offset>
+        <Delay>0.0</Delay>
+        <Correction>0.0</Correction>
+      </Decimation>
+      <StageGain>
+        <Value>1990.06</Value>
+        <Frequency>0.1</Frequency>
+      </StageGain>
+
+      </Stage>
+      <Stage number="2">
+      <Coefficients>
+        <InputUnits>
+          <Name>V</Name>
+          <Description>Voltage in Volts</Description>
+        </InputUnits>
+        <OutputUnits>
+          <Name>counts</Name>
+          <Description>Digital Count in Digital counts</Description>
+        </OutputUnits>
+        <CfTransferFunctionType>DIGITAL</CfTransferFunctionType>
+      </Coefficients>
+      <Decimation>
+        <InputSampleRate>5120.0</InputSampleRate>
+        <Factor>1</Factor>
+        <Offset>0</Offset>
+        <Delay>0.0</Delay>
+        <Correction>0.0</Correction>
+      </Decimation>
+      <StageGain>
+        <Value>413189.0</Value>
+        <Frequency>0.02</Frequency>
+      </StageGain>
+
+      </Stage>
+      <Stage number="3">
+      <FIR name="ASL_Q680_NewFW_40_3">
+        <Description>ASL_Q680_NewFW_40_Cascade</Description>
+        <InputUnits>
+          <Name>counts</Name>
+          <Description>Digital Count in Digital counts</Description>
+        </InputUnits>
+        <OutputUnits>
+          <Name>counts</Name>
+          <Description>Digital Count in Digital counts</Description>
+        </OutputUnits>
+        <Symmetry>EVEN</Symmetry>
+        <NumeratorCoefficient i="1">-0.00111328</NumeratorCoefficient>
+        <NumeratorCoefficient i="2">-0.001008</NumeratorCoefficient>
+        <NumeratorCoefficient i="3">-0.00135286</NumeratorCoefficient>
+        <NumeratorCoefficient i="4">-0.00173045</NumeratorCoefficient>
+        <NumeratorCoefficient i="5">-0.00208418</NumeratorCoefficient>
+        <NumeratorCoefficient i="6">-0.00238538</NumeratorCoefficient>
+        <NumeratorCoefficient i="7">-0.00260956</NumeratorCoefficient>
+        <NumeratorCoefficient i="8">-0.00273352</NumeratorCoefficient>
+        <NumeratorCoefficient i="9">-0.00273316</NumeratorCoefficient>
+        <NumeratorCoefficient i="10">-0.00258472</NumeratorCoefficient>
+        <NumeratorCoefficient i="11">-0.00226412</NumeratorCoefficient>
+        <NumeratorCoefficient i="12">-0.00174847</NumeratorCoefficient>
+        <NumeratorCoefficient i="13">-0.00101403</NumeratorCoefficient>
+        <NumeratorCoefficient i="14">-3.51682E-5</NumeratorCoefficient>
+        <NumeratorCoefficient i="15">0.00123782</NumeratorCoefficient>
+        <NumeratorCoefficient i="16">0.00315983</NumeratorCoefficient>
+        <NumeratorCoefficient i="17">0.00699945</NumeratorCoefficient>
+        <NumeratorCoefficient i="18">0.0090996</NumeratorCoefficient>
+        <NumeratorCoefficient i="19">0.0125424</NumeratorCoefficient>
+        <NumeratorCoefficient i="20">0.0163123</NumeratorCoefficient>
+        <NumeratorCoefficient i="21">0.0202632</NumeratorCoefficient>
+        <NumeratorCoefficient i="22">0.0243173</NumeratorCoefficient>
+        <NumeratorCoefficient i="23">0.0284051</NumeratorCoefficient>
+        <NumeratorCoefficient i="24">0.0324604</NumeratorCoefficient>
+        <NumeratorCoefficient i="25">0.0364143</NumeratorCoefficient>
+        <NumeratorCoefficient i="26">0.0401987</NumeratorCoefficient>
+        <NumeratorCoefficient i="27">0.0437451</NumeratorCoefficient>
+        <NumeratorCoefficient i="28">0.0469873</NumeratorCoefficient>
+        <NumeratorCoefficient i="29">0.0498573</NumeratorCoefficient>
+        <NumeratorCoefficient i="30">0.0522796</NumeratorCoefficient>
+        <NumeratorCoefficient i="31">0.054114</NumeratorCoefficient>
+        <NumeratorCoefficient i="32">0.0543903</NumeratorCoefficient>
+      </FIR>
+      <Decimation>
+        <InputSampleRate>5120.0</InputSampleRate>
+        <Factor>16</Factor>
+        <Offset>0</Offset>
+        <Delay>0.006</Delay>
+        <Correction>0.006</Correction>
+      </Decimation>
+      <StageGain>
+        <Value>1.0</Value>
+        <Frequency>0.0</Frequency>
+      </StageGain>
+
+      </Stage>
+      <Stage number="4">
+      <FIR name="ASL_Q680_NewFW_40_4">
+        <Description>ASL_Q680_NewFW_40_Cascade</Description>
+        <InputUnits>
+          <Name>counts</Name>
+          <Description>Digital Count in Digital counts</Description>
+        </InputUnits>
+        <OutputUnits>
+          <Name>counts</Name>
+          <Description>Digital Count in Digital counts</Description>
+        </OutputUnits>
+        <Symmetry>EVEN</Symmetry>
+        <NumeratorCoefficient i="1">1.53855E-4</NumeratorCoefficient>
+        <NumeratorCoefficient i="2">3.1277E-4</NumeratorCoefficient>
+        <NumeratorCoefficient i="3">4.52861E-4</NumeratorCoefficient>
+        <NumeratorCoefficient i="4">3.9578E-4</NumeratorCoefficient>
+        <NumeratorCoefficient i="5">-4.84389E-5</NumeratorCoefficient>
+        <NumeratorCoefficient i="6">-9.92496E-4</NumeratorCoefficient>
+        <NumeratorCoefficient i="7">-0.00235471</NumeratorCoefficient>
+        <NumeratorCoefficient i="8">-0.00378932</NumeratorCoefficient>
+        <NumeratorCoefficient i="9">-0.00472855</NumeratorCoefficient>
+        <NumeratorCoefficient i="10">-0.00456471</NumeratorCoefficient>
+        <NumeratorCoefficient i="11">-0.00293407</NumeratorCoefficient>
+        <NumeratorCoefficient i="12">7.16545E-6</NumeratorCoefficient>
+        <NumeratorCoefficient i="13">0.00346095</NumeratorCoefficient>
+        <NumeratorCoefficient i="14">0.00613788</NumeratorCoefficient>
+        <NumeratorCoefficient i="15">0.00669753</NumeratorCoefficient>
+        <NumeratorCoefficient i="16">0.00435528</NumeratorCoefficient>
+        <NumeratorCoefficient i="17">-5.88914E-4</NumeratorCoefficient>
+        <NumeratorCoefficient i="18">-0.00657815</NumeratorCoefficient>
+        <NumeratorCoefficient i="19">-0.0111658</NumeratorCoefficient>
+        <NumeratorCoefficient i="20">-0.0118968</NumeratorCoefficient>
+        <NumeratorCoefficient i="21">-0.00742773</NumeratorCoefficient>
+        <NumeratorCoefficient i="22">0.00157168</NumeratorCoefficient>
+        <NumeratorCoefficient i="23">0.0122001</NumeratorCoefficient>
+        <NumeratorCoefficient i="24">0.0200547</NumeratorCoefficient>
+        <NumeratorCoefficient i="25">0.0208071</NumeratorCoefficient>
+        <NumeratorCoefficient i="26">0.0121336</NumeratorCoefficient>
+        <NumeratorCoefficient i="27">-0.00474761</NumeratorCoefficient>
+        <NumeratorCoefficient i="28">-0.0246521</NumeratorCoefficient>
+        <NumeratorCoefficient i="29">-0.0395029</NumeratorCoefficient>
+        <NumeratorCoefficient i="30">-0.0407417</NumeratorCoefficient>
+        <NumeratorCoefficient i="31">-0.0223578</NumeratorCoefficient>
+        <NumeratorCoefficient i="32">0.0165229</NumeratorCoefficient>
+        <NumeratorCoefficient i="33">0.0705056</NumeratorCoefficient>
+        <NumeratorCoefficient i="34">0.128823</NumeratorCoefficient>
+        <NumeratorCoefficient i="35">0.178128</NumeratorCoefficient>
+        <NumeratorCoefficient i="36">0.206351</NumeratorCoefficient>
+      </FIR>
+      <Decimation>
+        <InputSampleRate>320.0</InputSampleRate>
+        <Factor>4</Factor>
+        <Offset>0</Offset>
+        <Delay>0.0837</Delay>
+        <Correction>0.0837</Correction>
+      </Decimation>
+      <StageGain>
+        <Value>1.0</Value>
+        <Frequency>0.0</Frequency>
+      </StageGain>
+
+      </Stage>
+      <Stage number="5">
+      <FIR name="ASL_Q680_NewFW_40_5">
+        <Description>ASL_Q680_NewFW_40_Cascade</Description>
+        <InputUnits>
+          <Name>counts</Name>
+          <Description>Digital Count in Digital counts</Description>
+        </InputUnits>
+        <OutputUnits>
+          <Name>counts</Name>
+          <Description>Digital Count in Digital counts</Description>
+        </OutputUnits>
+        <Symmetry>EVEN</Symmetry>
+        <NumeratorCoefficient i="1">2.88049E-4</NumeratorCoefficient>
+        <NumeratorCoefficient i="2">0.00155314</NumeratorCoefficient>
+        <NumeratorCoefficient i="3">0.00298231</NumeratorCoefficient>
+        <NumeratorCoefficient i="4">0.00251715</NumeratorCoefficient>
+        <NumeratorCoefficient i="5">-5.02927E-4</NumeratorCoefficient>
+        <NumeratorCoefficient i="6">-0.00281206</NumeratorCoefficient>
+        <NumeratorCoefficient i="7">-8.08708E-4</NumeratorCoefficient>
+        <NumeratorCoefficient i="8">0.00321543</NumeratorCoefficient>
+        <NumeratorCoefficient i="9">0.00271266</NumeratorCoefficient>
+        <NumeratorCoefficient i="10">-0.0029155</NumeratorCoefficient>
+        <NumeratorCoefficient i="11">-0.00509429</NumeratorCoefficient>
+        <NumeratorCoefficient i="12">0.00133933</NumeratorCoefficient>
+        <NumeratorCoefficient i="13">0.00740034</NumeratorCoefficient>
+        <NumeratorCoefficient i="14">0.00182796</NumeratorCoefficient>
+        <NumeratorCoefficient i="15">-0.00881958</NumeratorCoefficient>
+        <NumeratorCoefficient i="16">-0.00656719</NumeratorCoefficient>
+        <NumeratorCoefficient i="17">0.00838609</NumeratorCoefficient>
+        <NumeratorCoefficient i="18">0.0124269</NumeratorCoefficient>
+        <NumeratorCoefficient i="19">-0.00512979</NumeratorCoefficient>
+        <NumeratorCoefficient i="20">-0.0184869</NumeratorCoefficient>
+        <NumeratorCoefficient i="21">-0.00179237</NumeratorCoefficient>
+        <NumeratorCoefficient i="22">0.0233604</NumeratorCoefficient>
+        <NumeratorCoefficient i="23">0.0130477</NumeratorCoefficient>
+        <NumeratorCoefficient i="24">-0.025171</NumeratorCoefficient>
+        <NumeratorCoefficient i="25">-0.0293135</NumeratorCoefficient>
+        <NumeratorCoefficient i="26">0.0212669</NumeratorCoefficient>
+        <NumeratorCoefficient i="27">0.0521899</NumeratorCoefficient>
+        <NumeratorCoefficient i="28">-0.00661517</NumeratorCoefficient>
+        <NumeratorCoefficient i="29">-0.0883535</NumeratorCoefficient>
+        <NumeratorCoefficient i="30">-0.0366062</NumeratorCoefficient>
+        <NumeratorCoefficient i="31">0.186273</NumeratorCoefficient>
+        <NumeratorCoefficient i="32">0.403765</NumeratorCoefficient>
+      </FIR>
+      <Decimation>
+        <InputSampleRate>80.0</InputSampleRate>
+        <Factor>2</Factor>
+        <Offset>0</Offset>
+        <Delay>0.3793</Delay>
+        <Correction>0.3793</Correction>
+      </Decimation>
+      <StageGain>
+        <Value>1.0</Value>
+        <Frequency>0.0</Frequency>
+      </StageGain>
+
+      </Stage>
+     </Response>
+    </Channel>
+    <Channel code="BHZ" locationCode="00" startDate="2009-05-05T18:00:00.0000" endDate="2010-04-29T19:00:00.0000" restrictedStatus="open">
+     <Comment>
+      <Value>Config Change</Value>
+      <BeginEffectiveTime>2009-05-05T18:00:00.0000</BeginEffectiveTime>
+      <EndEffectiveTime>2010-04-29T19:00:00.0000</EndEffectiveTime>
+     </Comment>
+     <Comment>
+      <Value>[SENSOR::EPISENSOR ES-T::204], [SENSOR::CMG-3ESP::T3800], [LOGGER::Q680::921006]</Value>
+      <BeginEffectiveTime>2009-05-05T18:00:00.0000</BeginEffectiveTime>
+      <EndEffectiveTime>2010-04-29T19:00:00.0000</EndEffectiveTime>
+     </Comment>
+     <Latitude>33.1067</Latitude>
+     <Longitude>-80.1778</Longitude>
+     <Elevation>11</Elevation>
+     <Depth>0</Depth>
+     <Azimuth>0</Azimuth>
+     <Dip>-90</Dip>
+     <Type>CONTINUOUS</Type>
+     <Type>GEOPHYSICAL</Type>
+     <SampleRate>4E01</SampleRate>
+     <Sensor>
+      <Type>GURALP</Type>
+      <Description>Velocity Sensor</Description>
+      <Manufacturer>GURALP</Manufacturer>
+      <Model>CMG-3ESP</Model>
+      <SerialNumber>T3800</SerialNumber>
+     </Sensor>
+     <Equipment>
+      <Type>QUANTERRA</Type>
+      <Manufacturer>QUANTERRA</Manufacturer>
+      <Model>Q680</Model>
+      <SerialNumber>921006</SerialNumber>
+     </Equipment>
+     <Response>
+     <InstrumentSensitivity>
+       <Value>8.19403E8</Value>
+       <Frequency>0.1</Frequency>
+       <InputUnits>
+         <Name>m/s</Name>
+         <Description>Velocity in meters per second</Description>
+       </InputUnits>
+       <OutputUnits>
+         <Name>counts</Name>
+         <Description>Digital Count in Digital counts</Description>
+       </OutputUnits>
+     </InstrumentSensitivity>
+      <Stage number="1">
+      <PolesZeros name="CMG-3ESP ASL Legacy">
+        <Description>ASL Historical Metadata</Description>
+        <InputUnits>
+          <Name>m/s</Name>
+          <Description>Velocity in meters per second</Description>
+        </InputUnits>
+        <OutputUnits>
+          <Name>V</Name>
+          <Description>Voltage in Volts</Description>
+        </OutputUnits>
+        <PzTransferFunctionType>LAPLACE (RADIANS/SECOND)</PzTransferFunctionType>
+        <NormalizationFactor>310.164</NormalizationFactor>
+        <NormalizationFrequency>0.1</NormalizationFrequency>
+        <Zero number="0">
+          <Real>0.0</Real>
+          <Imaginary>0.0</Imaginary>
+        </Zero>
+        <Zero number="1">
+          <Real>0.0</Real>
+          <Imaginary>0.0</Imaginary>
+        </Zero>
+        <Zero number="2">
+          <Real>-945.6</Real>
+          <Imaginary>0.0</Imaginary>
+        </Zero>
+        <Pole number="0">
+          <Real>-0.04442</Real>
+          <Imaginary>-0.04442</Imaginary>
+        </Pole>
+        <Pole number="1">
+          <Real>-0.04442</Real>
+          <Imaginary>0.04442</Imaginary>
+        </Pole>
+        <Pole number="2">
+          <Real>-505.8</Real>
+          <Imaginary>-193.5</Imaginary>
+        </Pole>
+        <Pole number="3">
+          <Real>-505.8</Real>
+          <Imaginary>193.5</Imaginary>
+        </Pole>
+      </PolesZeros>
+      <Decimation>
+        <InputSampleRate>5120.0</InputSampleRate>
+        <Factor>1</Factor>
+        <Offset>0</Offset>
+        <Delay>0.0</Delay>
+        <Correction>0.0</Correction>
+      </Decimation>
+      <StageGain>
+        <Value>1980.05</Value>
+        <Frequency>0.1</Frequency>
+      </StageGain>
+
+      </Stage>
+      <Stage number="2">
+      <Coefficients>
+        <InputUnits>
+          <Name>V</Name>
+          <Description>Voltage in Volts</Description>
+        </InputUnits>
+        <OutputUnits>
+          <Name>counts</Name>
+          <Description>Digital Count in Digital counts</Description>
+        </OutputUnits>
+        <CfTransferFunctionType>DIGITAL</CfTransferFunctionType>
+      </Coefficients>
+      <Decimation>
+        <InputSampleRate>5120.0</InputSampleRate>
+        <Factor>1</Factor>
+        <Offset>0</Offset>
+        <Delay>0.0</Delay>
+        <Correction>0.0</Correction>
+      </Decimation>
+      <StageGain>
+        <Value>413941.0</Value>
+        <Frequency>0.02</Frequency>
+      </StageGain>
+
+      </Stage>
+      <Stage number="3">
+      <FIR name="ASL_Q680_NewFW_40_3">
+        <Description>ASL_Q680_NewFW_40_Cascade</Description>
+        <InputUnits>
+          <Name>counts</Name>
+          <Description>Digital Count in Digital counts</Description>
+        </InputUnits>
+        <OutputUnits>
+          <Name>counts</Name>
+          <Description>Digital Count in Digital counts</Description>
+        </OutputUnits>
+        <Symmetry>EVEN</Symmetry>
+        <NumeratorCoefficient i="1">-0.00111328</NumeratorCoefficient>
+        <NumeratorCoefficient i="2">-0.001008</NumeratorCoefficient>
+        <NumeratorCoefficient i="3">-0.00135286</NumeratorCoefficient>
+        <NumeratorCoefficient i="4">-0.00173045</NumeratorCoefficient>
+        <NumeratorCoefficient i="5">-0.00208418</NumeratorCoefficient>
+        <NumeratorCoefficient i="6">-0.00238538</NumeratorCoefficient>
+        <NumeratorCoefficient i="7">-0.00260956</NumeratorCoefficient>
+        <NumeratorCoefficient i="8">-0.00273352</NumeratorCoefficient>
+        <NumeratorCoefficient i="9">-0.00273316</NumeratorCoefficient>
+        <NumeratorCoefficient i="10">-0.00258472</NumeratorCoefficient>
+        <NumeratorCoefficient i="11">-0.00226412</NumeratorCoefficient>
+        <NumeratorCoefficient i="12">-0.00174847</NumeratorCoefficient>
+        <NumeratorCoefficient i="13">-0.00101403</NumeratorCoefficient>
+        <NumeratorCoefficient i="14">-3.51682E-5</NumeratorCoefficient>
+        <NumeratorCoefficient i="15">0.00123782</NumeratorCoefficient>
+        <NumeratorCoefficient i="16">0.00315983</NumeratorCoefficient>
+        <NumeratorCoefficient i="17">0.00699945</NumeratorCoefficient>
+        <NumeratorCoefficient i="18">0.0090996</NumeratorCoefficient>
+        <NumeratorCoefficient i="19">0.0125424</NumeratorCoefficient>
+        <NumeratorCoefficient i="20">0.0163123</NumeratorCoefficient>
+        <NumeratorCoefficient i="21">0.0202632</NumeratorCoefficient>
+        <NumeratorCoefficient i="22">0.0243173</NumeratorCoefficient>
+        <NumeratorCoefficient i="23">0.0284051</NumeratorCoefficient>
+        <NumeratorCoefficient i="24">0.0324604</NumeratorCoefficient>
+        <NumeratorCoefficient i="25">0.0364143</NumeratorCoefficient>
+        <NumeratorCoefficient i="26">0.0401987</NumeratorCoefficient>
+        <NumeratorCoefficient i="27">0.0437451</NumeratorCoefficient>
+        <NumeratorCoefficient i="28">0.0469873</NumeratorCoefficient>
+        <NumeratorCoefficient i="29">0.0498573</NumeratorCoefficient>
+        <NumeratorCoefficient i="30">0.0522796</NumeratorCoefficient>
+        <NumeratorCoefficient i="31">0.054114</NumeratorCoefficient>
+        <NumeratorCoefficient i="32">0.0543903</NumeratorCoefficient>
+      </FIR>
+      <Decimation>
+        <InputSampleRate>5120.0</InputSampleRate>
+        <Factor>16</Factor>
+        <Offset>0</Offset>
+        <Delay>0.006</Delay>
+        <Correction>0.006</Correction>
+      </Decimation>
+      <StageGain>
+        <Value>1.0</Value>
+        <Frequency>0.0</Frequency>
+      </StageGain>
+
+      </Stage>
+      <Stage number="4">
+      <FIR name="ASL_Q680_NewFW_40_4">
+        <Description>ASL_Q680_NewFW_40_Cascade</Description>
+        <InputUnits>
+          <Name>counts</Name>
+          <Description>Digital Count in Digital counts</Description>
+        </InputUnits>
+        <OutputUnits>
+          <Name>counts</Name>
+          <Description>Digital Count in Digital counts</Description>
+        </OutputUnits>
+        <Symmetry>EVEN</Symmetry>
+        <NumeratorCoefficient i="1">1.53855E-4</NumeratorCoefficient>
+        <NumeratorCoefficient i="2">3.1277E-4</NumeratorCoefficient>
+        <NumeratorCoefficient i="3">4.52861E-4</NumeratorCoefficient>
+        <NumeratorCoefficient i="4">3.9578E-4</NumeratorCoefficient>
+        <NumeratorCoefficient i="5">-4.84389E-5</NumeratorCoefficient>
+        <NumeratorCoefficient i="6">-9.92496E-4</NumeratorCoefficient>
+        <NumeratorCoefficient i="7">-0.00235471</NumeratorCoefficient>
+        <NumeratorCoefficient i="8">-0.00378932</NumeratorCoefficient>
+        <NumeratorCoefficient i="9">-0.00472855</NumeratorCoefficient>
+        <NumeratorCoefficient i="10">-0.00456471</NumeratorCoefficient>
+        <NumeratorCoefficient i="11">-0.00293407</NumeratorCoefficient>
+        <NumeratorCoefficient i="12">7.16545E-6</NumeratorCoefficient>
+        <NumeratorCoefficient i="13">0.00346095</NumeratorCoefficient>
+        <NumeratorCoefficient i="14">0.00613788</NumeratorCoefficient>
+        <NumeratorCoefficient i="15">0.00669753</NumeratorCoefficient>
+        <NumeratorCoefficient i="16">0.00435528</NumeratorCoefficient>
+        <NumeratorCoefficient i="17">-5.88914E-4</NumeratorCoefficient>
+        <NumeratorCoefficient i="18">-0.00657815</NumeratorCoefficient>
+        <NumeratorCoefficient i="19">-0.0111658</NumeratorCoefficient>
+        <NumeratorCoefficient i="20">-0.0118968</NumeratorCoefficient>
+        <NumeratorCoefficient i="21">-0.00742773</NumeratorCoefficient>
+        <NumeratorCoefficient i="22">0.00157168</NumeratorCoefficient>
+        <NumeratorCoefficient i="23">0.0122001</NumeratorCoefficient>
+        <NumeratorCoefficient i="24">0.0200547</NumeratorCoefficient>
+        <NumeratorCoefficient i="25">0.0208071</NumeratorCoefficient>
+        <NumeratorCoefficient i="26">0.0121336</NumeratorCoefficient>
+        <NumeratorCoefficient i="27">-0.00474761</NumeratorCoefficient>
+        <NumeratorCoefficient i="28">-0.0246521</NumeratorCoefficient>
+        <NumeratorCoefficient i="29">-0.0395029</NumeratorCoefficient>
+        <NumeratorCoefficient i="30">-0.0407417</NumeratorCoefficient>
+        <NumeratorCoefficient i="31">-0.0223578</NumeratorCoefficient>
+        <NumeratorCoefficient i="32">0.0165229</NumeratorCoefficient>
+        <NumeratorCoefficient i="33">0.0705056</NumeratorCoefficient>
+        <NumeratorCoefficient i="34">0.128823</NumeratorCoefficient>
+        <NumeratorCoefficient i="35">0.178128</NumeratorCoefficient>
+        <NumeratorCoefficient i="36">0.206351</NumeratorCoefficient>
+      </FIR>
+      <Decimation>
+        <InputSampleRate>320.0</InputSampleRate>
+        <Factor>4</Factor>
+        <Offset>0</Offset>
+        <Delay>0.0837</Delay>
+        <Correction>0.0837</Correction>
+      </Decimation>
+      <StageGain>
+        <Value>1.0</Value>
+        <Frequency>0.0</Frequency>
+      </StageGain>
+
+      </Stage>
+      <Stage number="5">
+      <FIR name="ASL_Q680_NewFW_40_5">
+        <Description>ASL_Q680_NewFW_40_Cascade</Description>
+        <InputUnits>
+          <Name>counts</Name>
+          <Description>Digital Count in Digital counts</Description>
+        </InputUnits>
+        <OutputUnits>
+          <Name>counts</Name>
+          <Description>Digital Count in Digital counts</Description>
+        </OutputUnits>
+        <Symmetry>EVEN</Symmetry>
+        <NumeratorCoefficient i="1">2.88049E-4</NumeratorCoefficient>
+        <NumeratorCoefficient i="2">0.00155314</NumeratorCoefficient>
+        <NumeratorCoefficient i="3">0.00298231</NumeratorCoefficient>
+        <NumeratorCoefficient i="4">0.00251715</NumeratorCoefficient>
+        <NumeratorCoefficient i="5">-5.02927E-4</NumeratorCoefficient>
+        <NumeratorCoefficient i="6">-0.00281206</NumeratorCoefficient>
+        <NumeratorCoefficient i="7">-8.08708E-4</NumeratorCoefficient>
+        <NumeratorCoefficient i="8">0.00321543</NumeratorCoefficient>
+        <NumeratorCoefficient i="9">0.00271266</NumeratorCoefficient>
+        <NumeratorCoefficient i="10">-0.0029155</NumeratorCoefficient>
+        <NumeratorCoefficient i="11">-0.00509429</NumeratorCoefficient>
+        <NumeratorCoefficient i="12">0.00133933</NumeratorCoefficient>
+        <NumeratorCoefficient i="13">0.00740034</NumeratorCoefficient>
+        <NumeratorCoefficient i="14">0.00182796</NumeratorCoefficient>
+        <NumeratorCoefficient i="15">-0.00881958</NumeratorCoefficient>
+        <NumeratorCoefficient i="16">-0.00656719</NumeratorCoefficient>
+        <NumeratorCoefficient i="17">0.00838609</NumeratorCoefficient>
+        <NumeratorCoefficient i="18">0.0124269</NumeratorCoefficient>
+        <NumeratorCoefficient i="19">-0.00512979</NumeratorCoefficient>
+        <NumeratorCoefficient i="20">-0.0184869</NumeratorCoefficient>
+        <NumeratorCoefficient i="21">-0.00179237</NumeratorCoefficient>
+        <NumeratorCoefficient i="22">0.0233604</NumeratorCoefficient>
+        <NumeratorCoefficient i="23">0.0130477</NumeratorCoefficient>
+        <NumeratorCoefficient i="24">-0.025171</NumeratorCoefficient>
+        <NumeratorCoefficient i="25">-0.0293135</NumeratorCoefficient>
+        <NumeratorCoefficient i="26">0.0212669</NumeratorCoefficient>
+        <NumeratorCoefficient i="27">0.0521899</NumeratorCoefficient>
+        <NumeratorCoefficient i="28">-0.00661517</NumeratorCoefficient>
+        <NumeratorCoefficient i="29">-0.0883535</NumeratorCoefficient>
+        <NumeratorCoefficient i="30">-0.0366062</NumeratorCoefficient>
+        <NumeratorCoefficient i="31">0.186273</NumeratorCoefficient>
+        <NumeratorCoefficient i="32">0.403765</NumeratorCoefficient>
+      </FIR>
+      <Decimation>
+        <InputSampleRate>80.0</InputSampleRate>
+        <Factor>2</Factor>
+        <Offset>0</Offset>
+        <Delay>0.3793</Delay>
+        <Correction>0.3793</Correction>
+      </Decimation>
+      <StageGain>
+        <Value>1.0</Value>
+        <Frequency>0.0</Frequency>
+      </StageGain>
+
+      </Stage>
+     </Response>
+    </Channel>
+   </Station>
+  </Network>
+ </FDSNStationXML>

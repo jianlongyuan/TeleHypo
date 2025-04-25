@@ -1,0 +1,165 @@
+<?xml version='1.0' encoding='utf-8'?>
+<q:quakeml xmlns:q="http://quakeml.org/xmlns/quakeml/1.2" xmlns:iris="http://service.iris.edu/fdsnws/event/1/" xmlns="http://quakeml.org/xmlns/bed/1.2" xmlns:xsi="http://www.w3.org/2000/10/XMLSchema-instance">
+  <eventParameters publicID="smi:service.iris.edu/fdsnws/event/1/query">
+    <event publicID="smi:service.iris.edu/fdsnws/event/1/query?eventid=2850011">
+      <preferredOriginID>smi:service.iris.edu/fdsnws/event/1/query?originid=36199</preferredOriginID>
+      <preferredMagnitudeID>smi:service.iris.edu/fdsnws/event/1/query?magnitudeid=36198</preferredMagnitudeID>
+      <type>earthquake</type>
+      <description iris:FEcode="121">
+        <text>OFF COAST OF NORTHERN CHILE</text>
+        <type>Flinn-Engdahl region</type>
+      </description>
+      <origin publicID="smi:service.iris.edu/fdsnws/event/1/query?originid=36199" iris:contributorOriginId="C201005060242A" iris:contributorEventId="C201005060242A" iris:catalog="GCMT">
+        <time>
+          <value>2010-05-06T02:42:53.900000Z</value>
+        </time>
+        <latitude>
+          <value>-18.32</value>
+        </latitude>
+        <longitude>
+          <value>-71.25</value>
+        </longitude>
+        <depth>
+          <value>52600.0</value>
+        </depth>
+        <creationInfo>
+          <author>GCMT</author>
+        </creationInfo>
+      </origin>
+      <magnitude publicID="smi:service.iris.edu/fdsnws/event/1/query?magnitudeid=36198">
+        <mag>
+          <value>6.2</value>
+        </mag>
+        <type>MW</type>
+      </magnitude>
+    </event>
+    <event publicID="smi:service.iris.edu/fdsnws/event/1/query?eventid=2849888">
+      <preferredOriginID>smi:service.iris.edu/fdsnws/event/1/query?originid=36185</preferredOriginID>
+      <preferredMagnitudeID>smi:service.iris.edu/fdsnws/event/1/query?magnitudeid=36184</preferredMagnitudeID>
+      <type>earthquake</type>
+      <description iris:FEcode="211">
+        <text>SOUTHEAST OF HONSHU, JAPAN</text>
+        <type>Flinn-Engdahl region</type>
+      </description>
+      <origin publicID="smi:service.iris.edu/fdsnws/event/1/query?originid=36185" iris:contributorOriginId="C201005031027A" iris:contributorEventId="C201005031027A" iris:catalog="GCMT">
+        <time>
+          <value>2010-05-03T10:27:48.700000Z</value>
+        </time>
+        <latitude>
+          <value>29.58</value>
+        </latitude>
+        <longitude>
+          <value>141.28</value>
+        </longitude>
+        <depth>
+          <value>98900.0</value>
+        </depth>
+        <creationInfo>
+          <author>GCMT</author>
+        </creationInfo>
+      </origin>
+      <magnitude publicID="smi:service.iris.edu/fdsnws/event/1/query?magnitudeid=36184">
+        <mag>
+          <value>6.1</value>
+        </mag>
+        <type>MW</type>
+      </magnitude>
+    </event>
+    <event publicID="smi:service.iris.edu/fdsnws/event/1/query?eventid=2849132">
+      <preferredOriginID>smi:service.iris.edu/fdsnws/event/1/query?originid=36124</preferredOriginID>
+      <preferredMagnitudeID>smi:service.iris.edu/fdsnws/event/1/query?magnitudeid=36123</preferredMagnitudeID>
+      <type>earthquake</type>
+      <description iris:FEcode="207">
+        <text>EASTERN NEW GUINEA REG., P.N.G.</text>
+        <type>Flinn-Engdahl region</type>
+      </description>
+      <origin publicID="smi:service.iris.edu/fdsnws/event/1/query?originid=36124" iris:contributorOriginId="C201004172315A" iris:contributorEventId="C201004172315A" iris:catalog="GCMT">
+        <time>
+          <value>2010-04-17T23:15:27.900000Z</value>
+        </time>
+        <latitude>
+          <value>-6.82</value>
+        </latitude>
+        <longitude>
+          <value>147.3</value>
+        </longitude>
+        <depth>
+          <value>62900.0</value>
+        </depth>
+        <creationInfo>
+          <author>GCMT</author>
+        </creationInfo>
+      </origin>
+      <magnitude publicID="smi:service.iris.edu/fdsnws/event/1/query?magnitudeid=36123">
+        <mag>
+          <value>6.2</value>
+        </mag>
+        <type>MW</type>
+      </magnitude>
+    </event>
+    <event publicID="smi:service.iris.edu/fdsnws/event/1/query?eventid=2846734">
+      <preferredOriginID>smi:service.iris.edu/fdsnws/event/1/query?originid=35948</preferredOriginID>
+      <preferredMagnitudeID>smi:service.iris.edu/fdsnws/event/1/query?magnitudeid=35947</preferredMagnitudeID>
+      <type>earthquake</type>
+      <description iris:FEcode="267">
+        <text>HALMAHERA, INDONESIA</text>
+        <type>Flinn-Engdahl region</type>
+      </description>
+      <origin publicID="smi:service.iris.edu/fdsnws/event/1/query?originid=35948" iris:contributorOriginId="C201003140057A" iris:contributorEventId="C201003140057A" iris:catalog="GCMT">
+        <time>
+          <value>2010-03-14T00:57:49.900000Z</value>
+        </time>
+        <latitude>
+          <value>-1.6</value>
+        </latitude>
+        <longitude>
+          <value>128.09</value>
+        </longitude>
+        <depth>
+          <value>58000.0</value>
+        </depth>
+        <creationInfo>
+          <author>GCMT</author>
+        </creationInfo>
+      </origin>
+      <magnitude publicID="smi:service.iris.edu/fdsnws/event/1/query?magnitudeid=35947">
+        <mag>
+          <value>6.4</value>
+        </mag>
+        <type>MW</type>
+      </magnitude>
+    </event>
+    <event publicID="smi:service.iris.edu/fdsnws/event/1/query?eventid=2846042">
+      <preferredOriginID>smi:service.iris.edu/fdsnws/event/1/query?originid=35879</preferredOriginID>
+      <preferredMagnitudeID>smi:service.iris.edu/fdsnws/event/1/query?magnitudeid=35878</preferredMagnitudeID>
+      <type>earthquake</type>
+      <description iris:FEcode="123">
+        <text>NORTHERN CHILE</text>
+        <type>Flinn-Engdahl region</type>
+      </description>
+      <origin publicID="smi:service.iris.edu/fdsnws/event/1/query?originid=35879" iris:contributorOriginId="C201003042239A" iris:contributorEventId="C201003042239A" iris:catalog="GCMT">
+        <time>
+          <value>2010-03-04T22:39:29.800000Z</value>
+        </time>
+        <latitude>
+          <value>-22.36</value>
+        </latitude>
+        <longitude>
+          <value>-68.69</value>
+        </longitude>
+        <depth>
+          <value>118700.0</value>
+        </depth>
+        <creationInfo>
+          <author>GCMT</author>
+        </creationInfo>
+      </origin>
+      <magnitude publicID="smi:service.iris.edu/fdsnws/event/1/query?magnitudeid=35878">
+        <mag>
+          <value>6.3</value>
+        </mag>
+        <type>MW</type>
+      </magnitude>
+    </event>
+  </eventParameters>
+</q:quakeml>

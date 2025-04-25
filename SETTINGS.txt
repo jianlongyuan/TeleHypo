@@ -1,0 +1,65 @@
+PARAMETER		    VALUE
+catalogPath  ./catalog_GCMT_2010-03-04_2010-05-13_Mw6.0-8.0_50-300km/
+nametag             PAPER
+area                PAPER
+velModel        ak135
+recDisScanBeg	0
+recDisScanEnd	95
+recDisScanInc	0.1
+srcDepthScanBeg	0
+srcDepthScanEnd	300
+srcDepthScanInc 	1
+
+tableP		        tableP_nx950nz300.p
+tableS			    tableS_nx950nz300.p
+
+studydepthbottom    20
+studydepthtop       150
+
+studydepth_for_locatebottom    20
+studydepth_for_locatetop       150
+depgrid            20
+latgrid             0.1
+longrid             0.1
+
+process_unit        60
+overlap             0
+
+wantedSnapShotID_id 0
+deplimRangebottom   20
+deplimRangetop      150
+
+sr                  20
+scanlowf            0.05
+scanhighf           1.00
+root                3
+win                 50
+step                1
+DetectionThreshold  1.0
+
+kurwindow           50
+picklf1             0.1       
+pickhf1             1      
+picklf2             0.1   
+pickhf2             1    
+dstop               100
+
+highq               2
+lowq                1
+terr                2        
+Q_threshold         0.2
+outlier             1         
+mindepgrid          0.5    
+minimprove          0.1 
+
+arrTimeDiffTole 		2.00
+ccThreshold		0.70
+vFrequencyFrom		0.25
+vFrequencyTo		5.00
+hFrequencyFrom		0.25
+hFrequencyTo		5.00
+depthRadiusAbove	                50
+depthRadiusBelow		50
+verboseFlag		0
+plotSteps1n2Flag		0
+
