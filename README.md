@@ -5,7 +5,7 @@ Framework:
     sub1_FetchData.py
     sub2_CalSignalToNoiseRatio.py
     sub3_FetchInventory.py
-    sub4_SelectAzimuthaStations.py
+    sub4_SelectAzimuthalStations.py
     sub5_PreliminaryLocation.py
     sub6_PreciseLocation.py
 

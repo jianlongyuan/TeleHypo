@@ -5,7 +5,7 @@ Framework:
     sub1_FetchData.py
     sub2_CalSignalToNoiseRatio.py
     sub3_FetchInventory.py
-    sub4_SelectAzimuthaStations.py
+    sub4_SelectAzimuthalStations.py
     sub5_PreliminaryLocation.py
     sub6_PreciseLocation.py
 
@@ -60,7 +60,7 @@ print('Downloading instrument response from IRIS ...')
 os.system('python sub3_FetchInventory.py')
 
 print('Selecting high S/N stations from 36 azimuthal regions ...')
-os.system('python sub4_SelectAzimuthaStations.py')
+os.system('python sub4_SelectAzimuthalStations.py')
 
 print('Locating preliminary hypocenter ...')
 os.system('python sub5_PreliminaryLocation.py')
