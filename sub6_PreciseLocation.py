@@ -30,9 +30,11 @@ for teleseismic location by automatically matching depth phase. Front. Earth Sci
   
 
 Any questions or advices? Please contact at:
-    jianlongyuan@cdut.edu.cn
-    1334631943@qq.com
-    j.yu@cdut.edu.cn
+    jianlongyuan@cdut.edu.cn (Jianlong Yuan)
+    1334631943@qq.com (Huilian Ma)
+    j.yu@cdut.edu.cn  (Jiashun Yu)
+    2751017165@qq.com (Zixuan Liu)
+    1716136870@qq.com (Shaojie Zhang)
      
 """
 

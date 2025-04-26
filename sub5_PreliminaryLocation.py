@@ -17,16 +17,18 @@ for teleseismic location by automatically matching depth phase. Front. Earth Sci
 
 
 Any questions or advices? Please contact at:
-    jianlongyuan@cdut.edu.cn
-    1334631943@qq.com
-    j.yu@cdut.edu.cn
+    jianlongyuan@cdut.edu.cn (Jianlong Yuan)
+    1334631943@qq.com (Huilian Ma)
+    j.yu@cdut.edu.cn  (Jiashun Yu)
+    2751017165@qq.com (Zixuan Liu)
+    1716136870@qq.com (Shaojie Zhang)
      
 """
+
 import numpy as np
 import pickle
 import taupz
 import csv
-import geodis
 from obspy import read
 from pathlib import Path
 import distance
@@ -41,15 +43,9 @@ from operator import itemgetter
 import picking
 import locatePS
 import calc_mag
-import stations_plot
-from scipy import signal
 import timeit
 import os,shutil,sys
 import pandas as pd
-import fnmatch
-from tool_plotbrmap import plotbrmap
-# from tool_plotMAXI import plotMAXI
-import numba as nb
 start = timeit.default_timer()
 
 plt.rcParams['font.family'] = 'serif'
@@ -135,7 +131,7 @@ try:
 except:
     sys.exit( 'No directories in the path: '+catalogPath ) 
 Ndirs = len( dirs )
-print( '目录个数 =', Ndirs )
+print( 'Ndirs =', Ndirs )
 
 
 #--查看每个子目录是否为空目录
@@ -1056,7 +1052,7 @@ for idx, idir in enumerate( dirs ):
             print('Elapsed time (total): ',
                   format( elapsedTime1, '.1f'), 'sec = ',
                   format( elapsedTime1/60.0, '.1f'), 'min' )         
-        #%% slices plotting
+        #%% plot brmap slices
         #plotbrmap(dataPath,peaktimes)
         # plotMAXI(dataPath)
 

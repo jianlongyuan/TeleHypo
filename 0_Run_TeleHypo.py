@@ -1,5 +1,5 @@
-# TeleHypo
-Hypocenter location method for teleseismic earthquakes
+# -*- coding: utf-8 -*-
+"""
 
 Framework:
     sub1_FetchData.py
@@ -45,3 +45,27 @@ Any questions or advices? Please contact at:
     j.yu@cdut.edu.cn  (Jiashun Yu)
     2751017165@qq.com (Zixuan Liu)
     1716136870@qq.com (Shaojie Zhang)
+    
+    
+"""
+import os
+
+print('Fetching catalog and waveforms from GCMT ...')
+#os.system('python sub1_FetchData.py')
+
+print('Calculating signal-to-noise ratio ...')
+os.system('python sub2_CalSignalToNoiseRatio.py')
+
+print('Downloading instrument response from IRIS ...')
+os.system('python sub3_FetchInventory.py')
+
+print('Selecting high S/N stations from 36 azimuthal regions ...')
+os.system('python sub4_SelectAzimuthaStations.py')
+
+print('Locating preliminary hypocenter ...')
+os.system('python sub5_PreliminaryLocation.py')
+
+print('Scanning precise hypocenter depth ...')
+os.system('python sub6_PreciseLocation.py')
+
+print('All jobs done!')

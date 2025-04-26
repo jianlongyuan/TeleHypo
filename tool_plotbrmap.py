@@ -139,8 +139,8 @@ def plotbrmap(dataPath,peaktimes):
     print( "minLon, maxLon=", minLon, maxLon )
     
     
-    srcXdegIdx = int( np.floor( (eventLat-minLat)/latgrid) )
-    srcYdegIdx = int( np.floor( (eventLon-minLon)/longrid) )
+    srcXdegIdx = np.int( np.floor( (eventLat-minLat)/latgrid) )
+    srcYdegIdx = np.int( np.floor( (eventLon-minLon)/longrid) )
     print('srcXdegIdx = ', srcXdegIdx)
     print('srcYdegIdx = ', srcYdegIdx)
     
