@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 """
 
-Function: Calculate signal to noise ratio
-
+Function: Function: Calculate signal to noise ratio of station 131A
+    
 """
 
 from obspy.taup import TauPyModel, taup_create
@@ -20,12 +20,10 @@ import timeit
 import shutil
 import csv
 import gc
-from PyPDF2 import PdfFileMerger
-
 plt.rcParams["font.family"] = "Times New Roman"
 
 
-#%%-- subroutine: load input parameters from 'DSA_SETTINGS.txt'
+#%%-- subroutine: load input parameters from 'SETTINGS.txt'
 def load_settings():
     '''
      PARAMETER          DESCRIPTION
@@ -62,7 +60,6 @@ def load_settings():
         par12 =  int( SETTINGS.VALUE.loc['plotSteps1n2Flag']  )
         
         return par1, par2, par3, par4, par5, par6, par7, par8, par9, par10, par11, par12     
-        #-- free  memmory
         gc.collect()  
     except:
         sys.exit("Errors in 'SETTINGS.txt' !\n")
@@ -86,9 +83,6 @@ def subArrivalTimeForward( velModel, srcDepth, recDisInDeg, phaList, recDepth ):
                                            phase_list= phaList,
                                            receiver_depth_in_km=recDepth) 
     return  arrivals
-
-    #-- free  memmory
-    #del arrivals
     gc.collect()
 
 
@@ -119,45 +113,40 @@ def subCalSteps1and2OneStation( args ):
     stationListHighSN= args[21]
     epLat = args[22]
     epLon = args[23]
-    evDp =  args[24] 
-    epTime = args[25]
-    #%%-- Allocate memory
-#    totNumMatPhaOneSta = np.zeros(( numScanDepth))
-#    avgArrTimeDiffResOneStaSum = np.zeros(( numScanDepth))
-#    avgArrTimeDiffResOneStaSum.fill(9999) # initial array with a high value
-#    depCanPhaDigNameOneStaZ = [[] for i in range(numScanDepth)]
-#    depCanPhaDigNameOneStaR = [[] for i in range(numScanDepth)]
-#    depCanPhaDigNameOneStaT = [[] for i in range(numScanDepth)]
-    
-    
-    #%%########################################################
-    # Step 1: Automatic generation of synthetic waveforms for #
-    #         all possible depth phases                       #
-    ###########################################################
-    #%%-- Get some key infomation   
-    starttime = epTime
+    evDp =  args[24]   
+
+    #%%-- Get some key infomation
+    evla  = iev.origins[0].latitude
+    evlo  = iev.origins[0].longitude
+    evdp  = iev.origins[0].depth/1000.0 
+
     network = stRawZ[0].stats.network
     station = stRawZ[0].stats.station
-#    location= stRawZ[0].stats.location
     wavestart = UTCDateTime(stRawZ[0].stats.starttime)
-
+    originTime = iev.origins[0].time
+    print('originTime = ',originTime)
     
-    print('starttime = ',starttime)
+    
+    network  = stRawZ[0].stats.network
+    station  = stRawZ[0].stats.station
+    location = stRawZ[0].stats.location
+    legendName = network+'.'+station+'.'+location
+    
+    
+    
     try:
         inv = read_inventory( "{0}{1}.{2}.xml".format( invPath, network, station ) )
     except:
         print( 'Can not find {0}{1}.{2}.xml'.format( invPath, network, station ) )
-        #-- free  memmory
         gc.collect()
         return(0)
-
+    
     net = inv[0]
     sta = net[0]
     stla = sta.latitude
     stlo = sta.longitude
     elev = sta.elevation
-
-    epi_dist, azimuth, baz = gps2dist_azimuth(epLat, epLon, stla, stlo )
+    epi_dist, azimuth, baz = gps2dist_azimuth(evla, evlo, stla, stlo )
     recDisInKm  = epi_dist/1000.0
     recDisInDeg = kilometer2degrees(recDisInKm)
     recDepth = 0  # station's depth( default 0 km)
@@ -173,9 +162,9 @@ def subCalSteps1and2OneStation( args ):
     stWantedZ0[0].detrend( type='simple')
     
     print( 'Detrend done!\n')
-#    stWantedE0[0].plot()
-#    stWantedN0[0].plot()
-#    stWantedZ0[0].plot()
+    # stWantedE0[0].plot()
+    # stWantedN0[0].plot()
+    # stWantedZ0[0].plot()
     #%%-- Remove response
     try:
         pre_filt = (0.001, 0.005, 50.0, 60.0)
@@ -242,7 +231,6 @@ def subCalSteps1and2OneStation( args ):
 
     print( 'Bandpass filtering done!\n')
     
-    
     resamRate = 10 # Hz
     stZ0.interpolate( sampling_rate=resamRate, method="lanczos",
                       a=12, window="blackman" )
@@ -253,6 +241,16 @@ def subCalSteps1and2OneStation( args ):
     DT = stZ0[0].stats.delta    
     print( 'Reampling done!\n')
 
+    stRawE0 = stRawE.copy()
+    stRawN0 = stRawN.copy()
+    stRawZ0 = stRawZ.copy()
+    stRawE0.interpolate( sampling_rate=resamRate, method="lanczos",
+                      a=12, window="blackman" )
+    stRawN0.interpolate( sampling_rate=resamRate, method="lanczos",
+                      a=12, window="blackman" )
+    stRawZ0.interpolate( sampling_rate=resamRate, method="lanczos",
+                      a=12, window="blackman" )    
+
 
     #%%-- check waveform
     if verboseFlag == 1:
@@ -261,8 +259,6 @@ def subCalSteps1and2OneStation( args ):
         stR0.plot()
         stT0.plot()
     
-  
-    #-- 
     Z0CP1 = stZ0.copy()  
     Z0CP2 = stZ0.copy() 
     R0CP1 = stR0.copy()  
@@ -273,12 +269,11 @@ def subCalSteps1and2OneStation( args ):
     
     
     
-    
     #%%-- Waveform scanning window used for DSA, choosing 2 mins before
     # theoretical onset of the direct P and 10 mins after S
     try:
 
-        refDepth = evDp # focal depth (adopt from Catalog) for calculting onset time of direct wave (km)        
+        refDepth = evdp # focal depth (adopt from Catalog) for calculting onset time of direct wave (km)        
         phaList = [ "P", 'pP', 'sP' ]
         arrivalsP = subArrivalTimeForward( velModel, refDepth, recDisInDeg, phaList, recDepth )
         calOnsetP   = arrivalsP[0].time
@@ -294,41 +289,40 @@ def subCalSteps1and2OneStation( args ):
         calOnsetScS = arrivalsScS[0].time
         
     except:
-        
         gc.collect()
         sys.exit( network+'.'+station+str(': theoretical onset time failed!') )
 
 
     print( arrivalsP+arrivalsS )
 
-         
-    #--
     timeBeforeP = 2*60 # sec
     timeAfterS  = 2*60 # sec
           
     #%%-- Extract wavefroms according to the wanted time window
     try:
-        timeWinBeg = calOnsetP-timeBeforeP
         timeWinEnd = calOnsetScS+timeAfterS
-        stR1 = stR0.trim( starttime+timeWinBeg, starttime+timeWinEnd )
-        stT1 = stT0.trim( starttime+timeWinBeg, starttime+timeWinEnd )
-        stZ1 = stZ0.trim( starttime+timeWinBeg, starttime+timeWinEnd )
+        stR1 = stR0.trim( originTime, originTime+timeWinEnd )
+        stT1 = stT0.trim( originTime, originTime+timeWinEnd )
+        stZ1 = stZ0.trim( originTime, originTime+timeWinEnd )
         #normalization
-        dataZ0 = stZ1[0].data / max( np.fabs(stZ1[0].data))
         dataR0 = stR1[0].data / max( np.fabs(stR1[0].data))
         dataT0 = stT1[0].data / max( np.fabs(stT1[0].data))
+        dataZ0 = stZ1[0].data / max( np.fabs(stZ1[0].data))
+        
+        #-- 对原始数据也进行重采样，用于成图比较
+        stRawE1 = stRawE0.trim( originTime, originTime+timeWinEnd )
+        stRawN1 = stRawN0.trim( originTime, originTime+timeWinEnd )
+        stRawZ1 = stRawZ0.trim( originTime, originTime+timeWinEnd )
+        #normalization
+        dataRawE = stRawE1[0].data / max( np.fabs(stRawE1[0].data))
+        dataRawN = stRawN1[0].data / max( np.fabs(stRawN1[0].data))
+        dataRawZ = stRawZ1[0].data / max( np.fabs(stRawZ1[0].data))
         
     except:
         print( network+'.'+station+str(': cut waveforms failed!') )
-
         gc.collect()
         return 0
- 
     
-
-    #%%########################################################################
-    #-- calculation s/n
-    ###########################################################################
     try:
         # Signal to noise ratio (S/N) is defined as TW2/TW1, where TW1 is the 
         # recording from the time window between 40s to 10s before the P 
@@ -342,28 +336,27 @@ def subCalSteps1and2OneStation( args ):
         timeAfterS  = 30 # sec
               
         
-        
         #%%-- Extract wavefroms according to the wanted time window
         noiseTimeWinBegZR  = calOnsetP-timeBeforeP-10
         noiseTimeWinEndZR  = calOnsetP-10
-        signalTimeWinBegZR = calOnsetP
-        signalTimeWinEndZR = calOnsetP+timeAfterP
+        signalTimeWinBegZR = noiseTimeWinEndZR+10
+        signalTimeWinEndZR = signalTimeWinBegZR+timeAfterP
     
         noiseTimeWinBegT  = calOnsetS-timeBeforeS-10
         noiseTimeWinEndT  = calOnsetS-10
-        signalTimeWinBegT = calOnsetS
-        signalTimeWinEndT = calOnsetS+timeAfterS
+        signalTimeWinBegT = noiseTimeWinEndT+10
+        signalTimeWinEndT = signalTimeWinBegT+timeAfterS
     
     
-        noiseZ = Z0CP1.trim( starttime+noiseTimeWinBegZR, starttime+noiseTimeWinEndZR )
-        signalZ= Z0CP2.trim( starttime+signalTimeWinBegZR, starttime+signalTimeWinEndZR )        
+        noiseZ = Z0CP1.trim( originTime+noiseTimeWinBegZR, originTime+noiseTimeWinEndZR )
+        signalZ= Z0CP2.trim( originTime+signalTimeWinBegZR, originTime+signalTimeWinEndZR )        
     
-        noiseR = R0CP1.trim( starttime+noiseTimeWinBegZR, starttime+noiseTimeWinEndZR )
-        signalR= R0CP2.trim( starttime+signalTimeWinBegZR, starttime+signalTimeWinEndZR )
+        noiseR = R0CP1.trim( originTime+noiseTimeWinBegZR, originTime+noiseTimeWinEndZR )
+        signalR= R0CP2.trim( originTime+signalTimeWinBegZR, originTime+signalTimeWinEndZR )
         
     
-        noiseT = T0CP1.trim( starttime+noiseTimeWinBegT, starttime+noiseTimeWinEndT )
-        signalT= T0CP2.trim( starttime+signalTimeWinBegT, starttime+signalTimeWinEndT )
+        noiseT = T0CP1.trim( originTime+noiseTimeWinBegT, originTime+noiseTimeWinEndT )
+        signalT= T0CP2.trim( originTime+signalTimeWinBegT, originTime+signalTimeWinEndT )
         
         
         
@@ -390,11 +383,11 @@ def subCalSteps1and2OneStation( args ):
         gc.collect()
         return 0    
 
-
-
-    if station == '131A':
+        
+    #%%--
+    if ist >= 0 :
         # set figure layout
-        fig = plt.figure( constrained_layout=True, figsize=(10,5))
+        fig = plt.figure( figsize=(10,5))
         fig.subplots_adjust(hspace=0.1)
         fig.subplots_adjust(wspace=0.0)
         gs0 = fig.add_gridspec(3, 1 )
@@ -405,141 +398,70 @@ def subCalSteps1and2OneStation( args ):
             
         # plot data
         tZRT = np.arange( 0, len(dataZ0), 1)*DT
-        ax0.plot( tZRT, dataZ0, label='Z' )
-        ax0.plot( calOnsetP-timeWinBeg, -0., 'o', color='red',   mfc='none', markersize=10 )
-        ax0.plot( calOnsetS-timeWinBeg, -0., 'o', color='black', mfc='none', markersize=10 )
+        ax0.plot( tZRT, dataZ0, lw=0.5, c='black' )
+        ax0.plot( calOnsetP, -0., 'o', color='red',   mfc='none', markersize=5 )
         
         tZRT = np.arange( 0, len(dataR0), 1)*DT
-        ax1.plot( tZRT, dataR0, label='R' )
-        ax1.plot( calOnsetP-timeWinBeg, -0., 'o', color='red',   mfc='none', markersize=10 )
-        ax1.plot( calOnsetS-timeWinBeg, -0., 'o', color='black', mfc='none', markersize=10 )
+        ax1.plot( tZRT, dataR0, label='R', lw=0.5, c='black' )
+        ax1.plot( calOnsetP, -0., 'o', color='red',   mfc='none', markersize=5 )
      
         tZRT = np.arange( 0, len(dataT0), 1)*DT
-        ax2.plot( tZRT, dataT0, label='T' )
-        ax2.plot( calOnsetS-timeWinBeg, -0., 'o', color='black', mfc='none', markersize=10 )
+        ax2.plot( tZRT, dataT0, lw=0.5, c='black' )
+        ax2.plot( calOnsetS, -0., 'o', color='red', mfc='none', markersize=5 )
     
-        
-        for i in range (len(arrivalsP)):
-            ax0.axvline( arrivalsP[i].time-timeWinBeg, linewidth=1, color='black', linestyle='--')
-            ax0.text( arrivalsP[i].time-timeWinBeg+2, 0.5, arrivalsP[i].name,
-                      fontsize=12, color='black', rotation=90)
-            ax1.axvline( arrivalsP[i].time-timeWinBeg, linewidth=1, color='black', linestyle='--')
-            ax1.text( arrivalsP[i].time-timeWinBeg+2, 0.5, arrivalsP[i].name,
-                      fontsize=12, color='black', rotation=90)
-            
-        for i in range (len(arrivalsS)):
-            ax2.axvline( arrivalsS[i].time-timeWinBeg, linewidth=1, color='black', linestyle='--')
-            ax2.text( arrivalsS[i].time-timeWinBeg+2, 0.5, arrivalsS[i].name,
-                      fontsize=12, color='black', rotation=90)
-      
-    #    ax0.axvspan( 0, timeBeforeP, alpha=0.1, color='black')   
-    #    ax0.axvspan( timeBeforeP, timeBeforeP+timeAfterP, alpha=0.1, color='red')      
+        ax0.axvspan( noiseTimeWinBegZR, noiseTimeWinEndZR, alpha=0.1, color='blue')   
+        ax0.axvspan( signalTimeWinBegZR, signalTimeWinEndZR, alpha=0.1, color='lime') 
+        ax1.axvspan( noiseTimeWinBegZR, noiseTimeWinEndZR, alpha=0.1, color='blue')   
+        ax1.axvspan( signalTimeWinBegZR, signalTimeWinEndZR, alpha=0.1, color='lime') 
+        ax2.axvspan( noiseTimeWinBegT, noiseTimeWinEndT, alpha=0.1, color='blue')   
+        ax2.axvspan( signalTimeWinBegT, signalTimeWinEndT, alpha=0.1, color='lime') 
         
         ax0.margins(0)
         ax1.margins(0)
         ax2.margins(0)
-        ax0.tick_params(axis='both', which='major', labelsize=10)
-        ax1.tick_params(axis='both', which='major', labelsize=10)
-        ax2.tick_params(axis='both', which='major', labelsize=10)
+        ax0.tick_params(axis='both', which='major', labelsize=14)
+        ax1.tick_params(axis='both', which='major', labelsize=14)
+        ax2.tick_params(axis='both', which='major', labelsize=14)
         ax0.xaxis.set_ticks_position('top')
         ax0.xaxis.set_label_position('top')
-        ax0.text( 0+2, 0.6, "Z"+'  '+'SN:'+str(format( snrZ, '.2f')),
-                  fontsize=12, color='black' )
-        ax1.text( 0+2, 0.6, "R"+'  '+'SN:'+str(format( snrR, '.2f')),
-                  fontsize=12, color='black' )
-        ax2.text( 350+2, 0.6, "T"+'  '+'SN:'+str(format( snrT, '.2f')),
-                  fontsize=12, color='black' )
+            
+        ax0.text( noiseTimeWinEndZR-10, -1.4, 'S/N: '+str(format( snrZ, '.1f')),
+                  fontsize=14, color='black' )
+        ax1.text( noiseTimeWinEndZR-10, -1.4, 'S/N: '+str(format( snrR, '.1f')),
+                  fontsize=14, color='black' )
+        ax2.text( noiseTimeWinEndT-10, -1.4, 'S/N: '+str(format( snrT, '.1f')),
+                  fontsize=14, color='black' )
+        
+        ax0.text(noiseTimeWinBegT+50, 0.4, legendName+'.BHZ\n'+'Distance: '+
+                 str( format( recDisInDeg, '.1f' ) )+r'$\degree$', fontsize=14 )
+        ax1.text(noiseTimeWinBegT+50, 0.4, legendName+'.BHR\n'+'Distance: '+
+                 str( format( recDisInDeg, '.1f' ) )+r'$\degree$', fontsize=14 )
+        ax2.text(noiseTimeWinBegZR-40,  0.4, legendName+'.BHT\n'+'Distance: '+
+                 str( format( recDisInDeg, '.1f' ) )+r'$\degree$', fontsize=14 )
+        
         ax1.set_xticks([])
-        ax0.set_xlim( 0, 300 )
-        ax1.set_xlim( 0, 300 )
-        ax2.set_xlim( 350, len(dataT0)*DT )
-        ax0.set_ylim( -1, 1 )
-        ax1.set_ylim( -1, 1 )
-        ax2.set_ylim( -1, 1 )
-        ax0.set_xlabel( 'Time (s)', fontsize=10 )
-        ax2.set_xlabel( 'Time (s)', fontsize=10 )
-        ax0.set_title( str(network)+'.'+str(station)+'\t'+ \
-                       str( format( recDisInDeg, '.2f' ) )+r'$\degree$',
-                       fontsize=14,
-                       loc = 'left')
+        ax0.set_xlim( noiseTimeWinBegZR-50, noiseTimeWinBegT+150 )
+        ax1.set_xlim( noiseTimeWinBegZR-50, noiseTimeWinBegT+150 )
+        ax2.set_xlim( noiseTimeWinBegZR-50, noiseTimeWinBegT+150 )
+        ax0.set_ylim( -1.5, 1.5 )
+        ax1.set_ylim( -1.5, 1.5 )
+        ax2.set_ylim( -1.5, 1.5 )
+        ax0.set_xlabel( 'Time (s)', fontsize=14 )
+        ax2.set_xlabel( 'Time (s)', fontsize=14 )
+        ax0.set_ylabel( 'Amp.', fontsize=14 )
+        ax1.set_ylabel( 'Amp.', fontsize=14 )
+        ax2.set_ylabel( 'Amp', fontsize=14 )
+
         plt.tight_layout()
-        #--保存
-        figName = "{0}.{1}_WaveformsPhasesSNR.pdf".format( network, station )
-        plt.savefig( str(outfilePath)+'/'+str(figName), dpi=100 )
-    
-        # Clear the current axes.
-        plt.cla() 
-        # Clear the current figure.
-        fig.clear()
-        plt.clf() 
-        # Closes all the figure windows.
-        plt.close('all')   
-        plt.close(fig)
-        gc.collect()
-    
-    
-        with open( figListName, mode='a', newline='' ) as outFile:
-            writer = csv.writer( outFile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
-            writer.writerow(['{0}'.format( ist ),
-                             '{0}'.format( network ),
-                             '{0}'.format( station ),
-                             '{0}'.format( epLat ),
-                             '{0}'.format( epLon ),
-                             '{0}'.format( evDp ),
-                             '{0}'.format( wavestart ),
-                             '{0}'.format( stla ),
-                             '{0}'.format( stlo ),
-                             '{0}'.format( elev ),
-                             '{0}'.format( azimuth ),
-                             '{0}'.format( format( recDisInDeg, '.2f' ) ),
-                             '{0}'.format( format( snrZ, '.2f' ) ),
-                             '{0}'.format( format( snrR, '.2f' ) ),
-                             '{0}'.format( format( snrT, '.2f' ) ),
-                             '{0}'.format( figName ) ])
-        outFile.close()
+        figName = "{0}.{1}_SNR.pdf".format( network, station )
+        figName1 = "{0}.{1}_SNR.png".format( network, station )
+        plt.savefig( str(outfilePath)+'/'+str(figName), dpi=200 )
+        plt.savefig( str(outfilePath)+'/'+str(figName1), dpi=200 )
+        plt.show()
+        plt.close()
 
 
 
-
-    SNRTHR = 3.0
-    if( snrZ >= SNRTHR and snrT >= SNRTHR ):
-        print( selectedfileE[ist] )
-        print( selectedfileN[ist] )
-        print( selectedfileZ[ist] )
-
-        #-- 输出信噪比高的台站列表
-        with open( stationListHighSN, mode='a', newline='' ) as outFile:
-            writer = csv.writer( outFile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
-            writer.writerow(['{0}'.format( ist ),
-                             '{0}'.format( network ),
-                             '{0}'.format( station ),
-                             '{0}'.format( epLat ),
-                             '{0}'.format( epLon ),
-                             '{0}'.format( evDp ),
-                             '{0}'.format( wavestart ),                              
-                             '{0}'.format( stla ),
-                             '{0}'.format( stlo ),
-                             '{0}'.format( elev ),
-                             '{0}'.format( azimuth ),
-                             '{0}'.format( format( recDisInDeg, '.2f' ) ),
-                             '{0}'.format( format( snrZ, '.2f' ) ),
-                             '{0}'.format( format( snrR, '.2f' ) ),
-                             '{0}'.format( format( snrT, '.2f' ) ),
-                             '{0}'.format( selectedfileE[ist] ),
-                             '{0}'.format( selectedfileN[ist] ),
-                             '{0}'.format( selectedfileZ[ist] ) ])
-        outFile.close()
-    gc.collect()
-
-
-
-
-
-
-
-
-
- 
 #%%-- Main
 if __name__ == "__main__":
      
@@ -548,67 +470,32 @@ if __name__ == "__main__":
     vFrequencyFrom, vFrequencyTo, hFrequencyFrom, hFrequencyTo,\
     depthRadiusAbove, depthRadiusBelow, verboseFlag, plotSteps1n2Flag = load_settings()
 
-    #%%--
     from obspy.core.event import read_events
-    readcsvflag = False
     try:
         catalog = read_events( catalogPath+'catalog.xml', format="QUAKEML"  )
         print( catalog )
     except:
-        readcsvflag = True
-        print( "No 'catalog.xml' in the catalog path: " + catalogPath ) 
-    if readcsvflag:
-        print( 'now try to read table_results.csv')
-        eventdata = pd.read_csv(catalogPath+'/table_results.csv')
-        catalog = eventdata['starttimeGCMT']
-        stla = eventdata['LatGCMT(deg)']
-        stlo = eventdata['LonGCMT(deg)']
-        elev = eventdata['DepGCMT(km)']
-    
+        sys.exit( "No 'catalog.xml' in the catalog path: " + catalogPath ) 
 
-    #-- 
     for idx, iev in enumerate( catalog ):
-     #if idx < (len(catalog)/2) and idx >= 17:
-        if readcsvflag:
-            #-- print some key information
-            epTime = UTCDateTime(catalog[idx])
-            print('epTime = ',epTime)
-            epLat  = stla[idx]
-            epLon  = stlo[idx]
-            evDp   = elev[idx]
-            print( '\n\n\n=============================')
-            print( 'Number of events =', len(catalog) )
-            print( 'Now processing event: ', idx+1, '/', len(catalog) )
-            print( 'epTime  = ', epTime )
-            print( 'epLat   = ', epLat )
-            print( 'epLon   = ', epLon )
-            print( 'evDp    = ', evDp )
-            date   = str(epTime)[0:10]
-            hour   = int(str(epTime)[11:13])
-            minute = int(str(epTime)[14:16])
-            second = int(str(epTime)[17:19])
-        else:
-            #-- print some key information
-            epTime = iev.origins[0].time
-            epLat  = iev.origins[0].latitude
-            epLon  = iev.origins[0].longitude
-            evDp   = iev.origins[0].depth /1000.0
-            #epMag  = iev.magnitudes[0].mag
-            print( '\n\n\n=============================')
-            print( 'Number of events =', len(catalog) )
-            print( 'Now processing event: ', idx+1, '/', len(catalog) )
-            print( 'epTime  = ', epTime )
-            print( 'epLat   = ', epLat )
-            print( 'epLon   = ', epLon )
-            print( 'evDp    = ', evDp )
-            #print( 'epMag   = ', epMag )
+        epTime = iev.origins[0].time
+        epLat  = iev.origins[0].latitude
+        epLon  = iev.origins[0].longitude
+        evDp   = iev.origins[0].depth /1000.0
+        epMag  = iev.magnitudes[0].mag
+        print( '\n\n\n=============================')
+        print( 'Number of events =', len(catalog) )
+        print( 'Now processing event: ', idx+1, '/', len(catalog) )
+        print( 'epTime  = ', epTime )
+        print( 'epLat   = ', epLat )
+        print( 'epLon   = ', epLon )
+        print( 'evDp    = ', evDp )
+        print( 'epMag   = ', epMag )
 
-            date   = iev.origins[0].time.datetime.date()
-            hour   = iev.origins[0].time.hour
-            minute = iev.origins[0].time.minute
-            second = iev.origins[0].time.second
-            
-        #%%-- 
+        date   = iev.origins[0].time.datetime.date()
+        hour   = iev.origins[0].time.hour
+        minute = iev.origins[0].time.minute
+        second = iev.origins[0].time.second
         eventDirectoryName = str(date)+'-'+str(hour)+'-'+str(minute)+'-'+str(second)
         print( 'eventDirectoryName', eventDirectoryName)
         
@@ -617,15 +504,11 @@ if __name__ == "__main__":
                   ' >  not found!' )
             continue
 
-        #--
         wfPath = catalogPath+str(eventDirectoryName)+'/'
-        #--
         invPath = catalogPath+str(eventDirectoryName)+'/'+'inventory'+'/'
-        #--
         velPath = catalogPath+'velocityModel'+'/'
     
-        #%%--
-        wfFiles = fnmatch.filter( sorted(os.listdir(wfPath)), '*.mseed')
+        wfFiles = fnmatch.filter( sorted(os.listdir(wfPath)), 'TA.131A*.mseed')
         numMseed  = len(wfFiles)
         if numMseed == 0:
             print( "--- No station waveform for this event! ---" )
@@ -640,7 +523,7 @@ if __name__ == "__main__":
                 wfFile2 = str( wfPath )+str( wfFiles[ist+1] )
                 wfFile3 = str( wfPath )+str( wfFiles[ist+2] )
                 
-                #-- 判断该台站是否含有三分量数据                
+                #--          
                 infileE = open( wfFile1 )
                 infileN = open( wfFile2 )
                 infileZ = open( wfFile3 )
@@ -668,13 +551,12 @@ if __name__ == "__main__":
 
         
         #%%-- create output file directory
-        if not os.path.exists(str(wfPath)+'figures_SNR'):
-            os.mkdir(str(wfPath)+'figures_SNR')
+        outfilePath = str('./outputFigures')
+        if not os.path.exists(outfilePath):
+            os.mkdir(outfilePath)
         else:
-            print( '\n Warning: "figures_SNR" already exists!\n')
+            print( '\n Warning: outfilePath already exists!\n')
             
-        outfilePath = str(wfPath)+'figures_SNR'
-              
         #%%--                       
         if evDp < 0 or evDp > 5000:
             sys.exit("\n Current event's depth error, stop!\n")
@@ -684,30 +566,13 @@ if __name__ == "__main__":
             depthRadiusAboveNew = math.floor(evDp)-5 #-- 0-4 km will give unstable results
         else:
             depthRadiusAboveNew = depthRadiusAbove
-        
-        #%%-- Step 1 to 3 of DSA
+
         srcDepthScanBeg = math.floor( evDp-depthRadiusAboveNew )
         srcDepthScanEnd = math.floor( evDp+depthRadiusBelow )
         numScanDepth    = int(srcDepthScanEnd-srcDepthScanBeg)
-
-
-
-        #%%-- 
-        figListName = str(outfilePath)+'/'+'0_FigListOfWaveformsAndPhasesAndSNR.csv'
-        with open( figListName, mode='w', newline='' ) as outFile:
-            writer = csv.writer( outFile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
-            writer.writerow( [ 'Idx', 'Net', 'Sta', 'epLat', 'epLon', 'evDp', 'epTime', 'Lat(deg)',  'Lon(deg)','elev',
-                               'Az(deg)', 'EpDis(deg)', 'snrZ', 'snrR', 'snrT',
-                               'figName' ] )
-
-        #%%--
+     
         stationListHighSN = str(wfPath)+'/'+'0_StationWithHighSNR.csv'
-        with open( stationListHighSN, mode='w', newline='' ) as outFile:
-            writer = csv.writer( outFile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
-            writer.writerow( [ 'Idx', 'Net', 'Sta', 'epLat', 'epLon', 'evDp', 'epTime', 'Lat(deg)',  'Lon(deg)', 'elev',
-                               'Az(deg)', 'EpDis(deg)', 'snrZ', 'snrR', 'snrT',
-                               'filePathE', 'filePathN', 'filePathZ' ] )
-       
+        
         #%%-- print key information
         print( '\n-------------------- INPUT PARAMETERS -----------------------\n')
         print( 'catalogPath        =', catalogPath )
@@ -733,34 +598,19 @@ if __name__ == "__main__":
         print( '\n-------------------------------------------------------------\n')    
 
 
- 
-    
-        #%%-- 
-        #---------------------#
-        #--                 --#
-        #---------------------#
         begin_timer = timeit.default_timer()
-        
-        #-- TauP
         taup_create.build_taup_model( str( velPath )+str(velModel)+'.nd', str( velPath ) )
         
-        for ist in range( numSt ):                   
+        for ist in range( numSt ):
             infileE = open( selectedfileE[ist] )
             infileN = open( selectedfileN[ist] )
             infileZ = open( selectedfileZ[ist] )
             stRawE = read(infileE.name, debug_headers=True)
             stRawN = read(infileN.name, debug_headers=True)
-            stRawZ = read(infileZ.name, debug_headers=True)            
+            stRawZ = read(infileZ.name, debug_headers=True)
             print('\n\n\n========================================' )
             print('Event: ', idx+1, '/', len(catalog) )
             print('Now processing:', ist+1, '/', numSt, 'stations' )
-#            print( stRawE )
-#            print( stRawN )
-#            print( stRawZ )
-#            stRawE.plot()
-#            stRawN.plot()
-#            stRawZ.plot()
-            
 
             cpyVelModel = str( velModel )+'-'+str( ist-ist )
             shutil.copy( str( velPath )+str(velModel)+'.npz',
@@ -773,79 +623,6 @@ if __name__ == "__main__":
                      arrTimeDiffTole, ccThreshold,\
                      vFrequencyFrom, vFrequencyTo,\
                      hFrequencyFrom, hFrequencyTo,\
-                     invPath, outfilePath, figListName, stationListHighSN, 
-                     epLat, epLon, evDp, epTime]
+                     invPath, outfilePath, catalogPath, stationListHighSN, 
+                     epLat, epLon, evDp]
             subCalSteps1and2OneStation( args )
-
-        
- 
-
-
-
-
-        
-        #%%##########################################
-        #-- 
-        #############################################
-        
-        data = pd.read_csv( str(outfilePath)+'/'+'0_FigListOfWaveformsAndPhasesAndSNR.csv' )
-        figName = data[ 'figName' ]
-        EpDis   = data[ 'EpDis(deg)' ]
-        numFigs = len( figName )
-        
-        #-- 30-50、50-70、70-90
-        figDis3050 = []
-        figDis5070 = []
-        figDis7090 = []
-        for iFig in range( numFigs ):
-            tmp = EpDis[iFig], figName[iFig]
-            if EpDis[iFig] >= 30 and EpDis[iFig] < 50:
-                figDis3050.append( tmp )
-            elif EpDis[iFig] >= 50 and EpDis[iFig] < 70:
-                figDis5070.append( tmp )
-            elif EpDis[iFig] >= 70 and EpDis[iFig] <= 90:
-                figDis7090.append( tmp )
-        
-        #-- 
-        figDis3050.sort(key=lambda item: item[0] )
-        figDis5070.sort(key=lambda item: item[0] )
-        figDis7090.sort(key=lambda item: item[0] )
-        
-        
-        #-- merge pdf
-        from PyPDF2 import PdfMerger
-        merger3050 = PdfMerger()
-        merger5070 = PdfMerger()
-        merger7090 = PdfMerger()
-        for idx, iMem in enumerate( figDis3050 ):
-            merger3050.append( str(outfilePath)+'/'+iMem[1] )
-        for idx, iMem in enumerate( figDis5070 ):
-            merger5070.append( str(outfilePath)+'/'+iMem[1] )
-        for idx, iMem in enumerate( figDis7090 ):
-            merger7090.append( str(outfilePath)+'/'+iMem[1] )            
-        
-        if len(figDis3050)>0:
-            merger3050.write( str(outfilePath)+'/'+'0_dist30-50_MergedStationsSNR.pdf' )
-        if len(figDis5070)>0:
-            merger5070.write( str(outfilePath)+'/'+'0_dist50-70_MergedStationsSNR.pdf' )
-        if len(figDis7090)>0:
-            merger7090.write( str(outfilePath)+'/'+'0_dist70-90_MergedStationsSNR.pdf' )
-        merger3050.close()
-        merger5070.close()
-        merger7090.close()
-        
-        del figName, EpDis, numFigs
-        del figDis3050, figDis5070, figDis7090
-        del merger3050, merger5070, merger7090
-        
-        
-        #%% calculate computing time
-        end_timer = timeit.default_timer()
-        elapsedTime = end_timer - begin_timer
-        print('Elapsed time: ', format( elapsedTime, '.1f'),
-          'sec = ', format( elapsedTime/60.0, '.1f'), 'min' )
-
-        gc.collect()
-        
-
-        

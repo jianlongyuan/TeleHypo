@@ -1,24 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Fri Jul 12 01:33:57 2019
 
-    Function:
-        Plot brightness in 2d and 3d slices
-
-    Input(4D dataset):
-        200MAXIvaluePAPER.p (x, y, z, t)
-
-    Output:
-        2d slice (XOY) of each event
-        3d slice (YOZ, XOY, XOZ) of each event
-
-@author: jianlongyuan
-
-Any questions or advices? Please contact at:
-    yuan_jianlong@126.com
-    1334631943@qq.com
-    j.yu@cdut.edu.cn
+Function: plot brightness function
     
 """
 
@@ -42,6 +26,11 @@ brmax = data['brmax']
 print(data)
 
 
+outfilePath = str('./outputFigures/')
+if not os.path.exists(outfilePath):
+    os.mkdir(outfilePath)
+else:
+    print( '\n Warning: outfilePath already exists!\n')
 
 fig = plt.figure(figsize=(3.5,1.8))
 
@@ -60,10 +49,6 @@ from matplotlib.ticker import AutoMinorLocator, MultipleLocator
 ax0.xaxis.set_major_locator( MultipleLocator(300))
 ax0.yaxis.set_major_locator( MultipleLocator(0.5))
 plt.tight_layout()
-plt.savefig(dataPath+'brmax_ForPaper.png', dpi=300)
-plt.savefig(dataPath+'brmax_ForPaper.svg', dpi=300)
+plt.savefig(outfilePath+'brmax_ForPaper.png', dpi=300)
+plt.savefig(outfilePath+'brmax_ForPaper.svg', dpi=300)
 plt.show()
-
-#-- 将图件复制到当前程序所在目录用于汇总其他图件
-shutil.copy(dataPath+'brmax_ForPaper.svg', './')
-shutil.copy(dataPath+'brmax_ForPaper.png', './')

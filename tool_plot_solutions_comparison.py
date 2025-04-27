@@ -1,24 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Fri Jul 12 01:33:57 2019
 
-    Function:
-        Plot brightness in 2d and 3d slices
-
-    Input(4D dataset):
-        200MAXIvaluePAPER.p (x, y, z, t)
-
-    Output:
-        2d slice (XOY) of each event
-        3d slice (YOZ, XOY, XOZ) of each event
-
-@author: jianlongyuan
-
-Any questions or advices? Please contact at:
-    yuan_jianlong@126.com
-    1334631943@qq.com
-    j.yu@cdut.edu.cn
+Function: plot solutions of TeleHypo, CGMT and ISC
     
 """
 
@@ -35,7 +19,6 @@ import shutil
 plt.rcParams['font.family'] = 'Times New Roman'
 
 
-#--仅用于2010-03-04-22-39-29事件的结果对比, 深度误差L1级别为正负5 km。详细目录见：
 #- http://www.isc.ac.uk/iscbulletin/search/catalogue/
 #- http://www.isc.ac.uk/isc-ehb/search/catalogue/
 ISC_LAT,  ISC_LON, ISC_DEPTH          = -22.3151, -68.4615, 105.0
@@ -55,15 +38,10 @@ def load_settings():
         par16 =  int( SETTINGS.VALUE.loc['wantedSnapShotID_id']  )
         par17 =  int( SETTINGS.VALUE.loc['deplimRangebottom']  )
         par18 =  int( SETTINGS.VALUE.loc['deplimRangetop']  )       
-      
 
-        
-        
-        
         return  par7, par8, par9, \
                 par10, par11, par16, par17, par18
-               
-    
+
     except:
         sys.exit("Errors in 'SETTINGS.txt' !\n")
 
@@ -255,33 +233,18 @@ def plotMAXI(dataPath):
         ax3.set_ylabel('Depth (km)', fontsize=10)
         ax3.set_xticks(np.arange(round(minLon,0)-0.5, round(maxLon,0)+0.5, step=0.5))
         ax3.set_yticks(np.arange(studydepth_for_locate[0], studydepth_for_locate[1], step=10))
-    
-        # ax3.set_xlim(xlimRange)
         ax3.set_ylim(deplimRange)
         ax3.set_ylim(ax3.get_ylim()[::-1])
         ax3.set_aspect('auto')
-        # ax3.scatter(snapSrcLon, snapSrcDep, marker="o",
-        #             facecolors='none', edgecolors='white', linewidths=2,
-        #             s=200, color='white', zorder=111, label='TeleHypo')
         ax3.scatter(snapSrcLon, dsaSrcDep, marker="o",
                     facecolors='none', edgecolors='white', linewidths=2,
                     s=50, color='white', zorder=111, label='TeleHypo')
         ax3.scatter(eventLon, eventDep, marker="o",
                     facecolors='none', edgecolors='black', linewidths=2,
                     s=50, color='black', zorder=111, label='GCMT')
-        # ax3.scatter(ISC_LON, ISC_DEPTH, marker="o",
-        #             facecolors='none', edgecolors='lime', linewidths=2,
-        #             s=200, color='lime', zorder=111, label='ISC')
         ax3.scatter(ISCEHB_LON, ISCEHB_DEPTH, marker="o",
                     facecolors='none', edgecolors='lime', linewidths=2,
                     s=50, color='green', zorder=111, label='ISCEHB')
-        # -- add figure number
-        #    ax1.text( 29, 46, 'a)', fontsize=12, color='white' )
-        #    ax2.text( 2,  46, 'b)', fontsize=12, color='white' )
-        #    ax3.text( 2,   4, 'c)', fontsize=12, color='white' )
-
-
-        #-- 定义主级，次级刻度个数
         from matplotlib.ticker import AutoMinorLocator, MultipleLocator
         ax1.xaxis.set_major_locator( MultipleLocator(20))
         ax1.yaxis.set_major_locator( MultipleLocator(0.5))
@@ -290,12 +253,15 @@ def plotMAXI(dataPath):
         ax3.xaxis.set_major_locator( MultipleLocator(0.5))
         ax3.yaxis.set_major_locator( MultipleLocator(20))
     
+        outfilePath = str('./outputFigures/')
+        if not os.path.exists(outfilePath):
+            os.mkdir(outfilePath)
+        else:
+            print( '\n Warning: outfilePath already exists!\n')
         #plt.tight_layout()
-        plt.savefig("{0}/MAXI_3D_ev{1}.png".format(outputdir,iSnapShot), bbox_inches='tight', dpi=300)
-        plt.savefig("{0}/MAXI_3D_ev{1}.svg".format(outputdir,iSnapShot), bbox_inches='tight', dpi=300)
+        plt.savefig("{0}/solutionsComparison{1}.png".format(outfilePath,iSnapShot), bbox_inches='tight', dpi=300)
+        plt.savefig("{0}/solutionsComparison{1}.svg".format(outfilePath,iSnapShot), bbox_inches='tight', dpi=300)
         plt.show()
-        
-        shutil.copy("{0}/MAXI_3D_ev{1}.svg".format(outputdir,iSnapShot), './')
 #%% 
 if __name__=="__main__":        
     dataPath = './catalog_GCMT_2010-03-04_2010-05-13_Mw6.0-8.0_50-300km/2010-03-04-22-39-29/'

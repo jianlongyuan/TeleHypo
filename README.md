@@ -21,9 +21,10 @@ Quickstart:
 
   
   Plot location results:
-        tool_plotMaxbrmapCurve.py
-        tool_plotMAXI.py
-        tool_plotDSA-STEP3.py
+        tool_plot_SNR.py
+        tool_plot_brightness function.py
+        tool_plot_DSA_depth_solution.py
+        tool_plot_solutions_comparison.py
 
 
 Please cite:
